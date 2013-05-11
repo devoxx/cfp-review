@@ -1,0 +1,19 @@
+<div ng-controller="MainCtrl">
+    <h3>Devoxx Call For Papers - Review</h3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>rate</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="t in data.talks" ng-class="{'success': t.state=='Approved'}" id="talk-{{t.id}}">
+            <td>{{t.id}}</td>
+            <td>{{t.title}}</td>
+            <td><rating value="t.rate" max="5"></rating></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

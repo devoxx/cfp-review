@@ -1,0 +1,5 @@
+app/components
+dist
+test_out
+coverage
+node_modules
