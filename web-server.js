@@ -200,6 +200,8 @@ StaticServlet.prototype.sendDirectory_ = function(req, res, path) {
 
     var remaining = files.length;
     files.forEach(function(fileName, index) {
+      if(fileName == 'index.html')
+        return self.sendFile_(req, res, path + 'index.html');
       fs.stat(path + '/' + fileName, function(err, stat) {
         if (err)
           return self.sendError_(req, res, err);
