@@ -5,7 +5,11 @@ angular.module('cfpReviewApp', ['Services', 'ui.bootstrap'])
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrlJS'
+      })
+      .when('/coffee', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrlCoffee'
       })
       .otherwise({
         redirectTo: '/'

@@ -1,11 +1,11 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: MainCtrlJS', function () {
 
   // load the controller's module
   beforeEach(module('cfpReviewApp'));
 
-  var MainCtrl,
+  var MainCtrlJS,
     scope,
     TalksService;
 
@@ -16,15 +16,14 @@ describe('Controller: MainCtrl', function () {
     TalksService = {talks: jasmine.createSpy('TalksService.talks')};
     TalksService.talks.andReturn(["a talk", "another one"]);
 
-    MainCtrl = $controller('MainCtrl', {
+    MainCtrlJS = $controller('MainCtrlJS', {
       $scope: scope,
       TalksService: TalksService
     });
   }));
 
   it('should attach a list of talks to the scope', function () {
-    expect(scope.data).toBeDefined();
-    expect(scope.data.talks).toBeDefined();
-    expect(scope.data.talks.length).toBeGreaterThan(1);
+    expect(scope.talks).toBeDefined();
+    expect(scope.talks.length).toBeGreaterThan(1);
   });
 });

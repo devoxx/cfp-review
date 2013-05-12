@@ -11,7 +11,7 @@ describe('Service: Services', function () {
     TalksService = _TalksService_;
   }));
 
-  it('should get a talk list ', function () {
+  it('should get a talk list', function () {
     var actual = TalksService.talks();
     expect(actual).toBeDefined();
     expect(actual.length).toEqual(40);
