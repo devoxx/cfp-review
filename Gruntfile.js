@@ -73,7 +73,13 @@ module.exports = function (grunt) {
       e2e: {
         options: {
           port: 9001,
-          base: yeomanConfig.app
+          middleware: function (connect) {
+            return [
+              lrSnippet,
+              mountFolder(connect, '.tmp'),
+              mountFolder(connect, yeomanConfig.app)
+            ];
+          }
         }
       }
     },
@@ -297,6 +303,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test-e2e', [
     'clean:server',
+    'coffee',
     'connect:e2e',
     'karma:e2e'
   ]);
@@ -304,8 +311,8 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'jshint',
-    'test',
     'coffee',
+    'test',
     'compass:dist',
     'useminPrepare',
     'imagemin',

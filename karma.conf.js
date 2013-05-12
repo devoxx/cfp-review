@@ -13,6 +13,7 @@ files = [
   'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
   'app/scripts/*.js',
   'app/scripts/**/*.js',
+  '.tmp/scripts/**/*.js',
   'test/mock/**/*.js',
   'test/spec/**/*.js',
   '.tmp/spec/**/*.js'
@@ -26,14 +27,14 @@ exclude = [];
 reporters = ['progress', 'coverage', 'junit'];
 
 preprocessors = {
-    '!(dist)/scripts/**/*.js': 'coverage'
+  '.tmp/scripts/**/*.js': 'coverage',
+  '!(dist)/scripts/**/*.js': 'coverage'
 };
 
 coverageReporter = {
   type : 'html',
   dir : 'coverage/'
 }
-
 
 // web server port
 port = 8080;

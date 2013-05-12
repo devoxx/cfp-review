@@ -1,18 +1,25 @@
 <div>
     <h3>Devoxx Call For Papers - Review</h3>
     <table class="table table-striped">
+        <caption>Presentation Search Results (???)</caption>
         <thead>
         <tr>
             <th>id</th>
             <th>title</th>
+            <th>type</th>
+            <th>state</th>
             <th>rate</th>
+            <th>voters</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="t in talks" ng-class="{'success': t.state=='Approved'}" id="talk-{{t.id}}">
             <td>{{t.id}}</td>
             <td>{{t.title}}</td>
+            <td>{{t.type}}</td>
+            <td><span class="label" ng-class="stateClass(t.state)">{{stateDisplay(t.state)}}</span></td>
             <td><rating value="t.rate" max="5"></rating></td>
+            <td>{{t.voters}}</td>
         </tr>
         </tbody>
     </table>

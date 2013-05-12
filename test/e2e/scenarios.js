@@ -8,10 +8,11 @@ describe('Main', function () {
     browser().navigateTo('/index.html');
   });
 
-  describe('Main features', function () {
+  describe('Display talks', function () {
     it('should display a list of talk with only one selected', function () {
+//      pause();
       expect(element('[id^=talk-]').count()).toBeGreaterThan(1);
-      expect(element('[id^=talk-][class*=success]').count()).toEqual(1);
+      expect(element('[id^=talk-][class*=success]').count()).toEqual(4);
     });
   });
 
