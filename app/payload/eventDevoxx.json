@@ -1,0 +1,111 @@
+{
+  "id": 8,
+  "version": 586,
+  "name": "DevoxxFrance 2013",
+  "eventFrom": "2013-03-27",
+  "eventTo": "2013-03-29",
+  "enabled": true,
+  "cfpFrom": "2012-11-19",
+  "cfpTo": "2013-01-31",
+  "description": "Devoxx France 2013",
+  "email": "sja@devoxx.com",
+  "key": "FR13",
+  "deleted": false,
+  "committee": null,
+  "twitterHandle": "@DevoxxFR",
+  "twitterHashtag": "#DevoxxFR",
+  "terms": "<p><strong><span style=\"text-decoration: underline;\">Devoxx Session  Invitation Acceptance Form</span></strong><br /> <br /> By clicking \"I Accept\" below, you are confirming that you will present     the session shown below at the 2013 Devoxx France conference which is    scheduled to take place on March 27-29, 2013 in Paris, France.</p>\r\n<p><span style=\"white-space: pre;\">&nbsp;</span></p>",
+  "presentations": null,
+  "types": [
+    {
+      "id": 5,
+      "version": 13,
+      "name": "Quickie",
+      "description": "<ul>\r\n<li>Short 15 minute presentations during Lunch breaks </li>\r\n<li>They are not recorded</li>\r\n</ul>",
+      "duration": 15
+    },
+    {
+      "id": 6,
+      "version": 12,
+      "name": "Hands-on Labs",
+      "description": "<ul>\r\n<li>3 hour hands-on sessions.&nbsp;&nbsp; </li>\r\n<li>They are not recorded for Parleys.com.&nbsp; </li>\r\n<li>Hands-on instructors receive a full pass.</li>\r\n</ul>",
+      "duration": 180
+    },
+    {
+      "id": 2,
+      "version": 18,
+      "name": "University",
+      "description": "<ul>\r\n<li>University talks are in depth presentations of 3 hours&nbsp; </li>\r\n<li>They are recorded for Parleys.com</li>\r\n<li>University speakers receive a full pass</li>\r\n</ul>",
+      "duration": 180
+    },
+    {
+      "id": 1,
+      "version": 14,
+      "name": "Conference",
+      "description": "<ul>\r\n<li>Each conference talk is 50 minutes long</li>\r\n<li>They're recorded for Parleys.com</li>\r\n<li>Conference speakers receive a full pass.</li>\r\n</ul>",
+      "duration": 60
+    },
+    {
+      "id": 4,
+      "version": 12,
+      "name": "BOF",
+      "description": "<ul>\r\n<li>BOF sessions are 60 minutes long, scheduled in the evening and are informal.</li>\r\n</ul>\r\n<ul>\r\n<li>The BOF sessions are not recorded for Parleys.com</li>\r\n</ul>",
+      "duration": 60
+    },
+    {
+      "id": 8,
+      "version": 0,
+      "name": "AM des décideurs",
+      "description": "<p>L'apr&egrave;s-midi des d&eacute;cideurs permet de prendre du recul sur notre industrie et d'&eacute;couter les retours d'experience d'utilisateurs</p>",
+      "duration": 25
+    },
+    {
+      "id": 3,
+      "version": 13,
+      "name": "Tools in Action",
+      "description": "<ul>\r\n<li>Tools in Action are 30 minute presentations demonstrating a programming tool. </li>\r\n</ul>\r\n<ul>\r\n<li>They're recorded for Parleys.com.&nbsp; </li>\r\n</ul>\r\n<ul>\r\n<li>Tools in Action speakers receive a full pass.</li>\r\n</ul>",
+      "duration": 30
+    }
+  ],
+  "tracks": [
+    {
+      "id": 15,
+      "version": 3,
+      "name": "Jeux, Web et Mobile",
+      "description": "<p><span style=\"color: #666666; font-family: sans-serif; font-size: 12px; line-height: 19px;\">HTML5, Javascript, Architectures webs, Cloud computing, nosql, Android, AS3, Flex, d&eacute;veloppement embarqu&eacute;...</span></p>"
+    },
+    {
+      "id": 21,
+      "version": 0,
+      "name": "Startup, architecture et entreprenariat",
+      "description": "<p>Startup, architecture et entreprenariat</p>"
+    },
+    {
+      "id": 20,
+      "version": 1,
+      "name": "Infrastructure, hardware d’hier et de demain",
+      "description": "<p>&nbsp;Infrastructure, hardware d&rsquo;hier et de demain</p>"
+    },
+    {
+      "id": 18,
+      "version": 2,
+      "name": "Java, one track to rule them all",
+      "description": "<p><span style=\"color: #666666; font-family: sans-serif; font-size: 12px; line-height: 19px;\">Java SE 7/8, Java EE, Spring, les outils et les librairies, tout ce qui tourne autour de Java en g&eacute;n&eacute;ral.</span></p>"
+    },
+    {
+      "id": 17,
+      "version": 4,
+      "name": "Développeur au quotidien",
+      "description": "<p><span style=\"color: #666666; font-family: sans-serif; font-size: 12px; line-height: 19px;\">Pratiques Agiles, Kanban, retour d'exp&eacute;rience, de \"Vrais Projets de la Vraie Vie\", communaut&eacute;, m&eacute;tier, devops, TDD, BDD.</span></p>"
+    },
+    {
+      "id": 16,
+      "version": 5,
+      "name": "Langages alternatifs",
+      "description": "<p><span style=\"color: #666666; font-family: sans-serif; font-size: 12px; line-height: 19px;\">Groovy, Scala, Clojure, Ceylon, Kotlin, Javascript, Fantom, JRuby. Ce th&egrave;me regroupera aussi les librairies ou les frameworks sur ces langages</span></p>"
+    }
+  ],
+  "languages": null,
+  "presTerms": "<p><strong><span style=\"text-decoration: underline;\">Devoxx 2013 Speaker  Consent Form</span></strong></p>\r\n<p>On behalf of myself and my company/organization, (\"Organization\") and     in consideration of my participation in the Event, I grant Devoxx   (and   its designated contractors), and its subsidiaries and affiliates   under   common control (\"Devoxx\") the following permissions in   connection with  Devoxx France 2013, which are scheduled to  take place March 27-29, 2013  (the \"Event\"):</p>\r\n<ol>\r\n<li>Permission to use my name, biographic material, likeness, and     portrait (hereinafter collectively referred to as my \"Likeness\") for the     purpose of publicizing my presentation(s) at/participation in the    Event  (my \"Presentation\").</li>\r\n<li>Permission to make sound and visual recordings of my Presentation  (the \"Recordings\").</li>\r\n<li>Permission to use, copy, translate, reformat, broadcast, publish,     and distribute all or parts of my Presentation, the Recordings, a     transcript of the Recordings, and any presentation materials that I     provide to Devoxx and use in connection with my Presentation (the     \"Presentation Materials\"). This includes, without limitation, the right     to make and distribute a DVD of the Event proceedings that contains   the   Recordings and Presentation Materials, the right to distribute the     Presentation Materials via streaming and download from the   Parleys.com  web site, and the  right to distribute, broadcast and   rebroadcast my  Presentation as part  of Event proceedings and archives   that Devoxx  makes available on its web  site. Any such use must be in   connection  with the Event, and must not  be misleading or reflect   negatively on my  Organization or me.</li>\r\n</ol>\r\n<p>I understand that neither my Organization nor I will receive any     compensation for granting these permissions. Devoxx is not granted any     other permissions or rights with respect to my Likeness, my     Presentation, the Recordings, or the Presentation Materials.</p>\r\n<p>(1) I am the person who is accepting the invitation to present the  session listed above;</p>\r\n<p>(2) grant this permission and agree to the terms  and conditions set forth above on behalf of my Organization and myself;</p>\r\n<p>(3) have authority to agree to such terms and conditions on behalf of my  Organization or co-speaker; and</p>\r\n<p>(4) confirm that no further consents or permissions  are required by Devoxx in order to use the Presentation Materials.</p>",
+  "cfpToEndOfDay": "2013-02-01T00:00:00.000+0000"
+}

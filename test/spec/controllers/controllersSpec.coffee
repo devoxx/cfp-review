@@ -1,24 +1,54 @@
 describe 'Controller: MainCtrl', ->
   beforeEach module 'cfpReviewApp'
+  beforeEach ->
+    this.addMatchers {
+      toEqualData: (expected) ->
+        angular.equals this.actual, expected
+    }
 
   MainCtrl= {}
   scope= {}
-  TalksService= {}
+  PresentationsService= {}
+  presentation = {}
 
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
-    TalksService = {talks: jasmine.createSpy('TalksService.talks')}
-    TalksService.talks.andReturn(["a talk", "another one"])
+    PresentationsService = {query: jasmine.createSpy('PresentationsService.query')}
+    presentation = {ratings: [{percentage: 2},{percentage: 4}]}
+    PresentationsService.query.andReturn([presentation])
 
     MainCtrl = $controller('MainCtrl', {
       $scope: scope,
-      TalksService: TalksService
+      PresentationsService: PresentationsService
     });
 
-  it 'should attach a list of talks to the scope', ->
-    expect(scope.talks).toBeDefined()
-    expect(scope.talks.length).toBeGreaterThan(1)
+  it 'should calculate average rating on a presentation', ->
+    actual = scope.averageRating presentation
+    expect(actual).toBeDefined()
+    expect(actual).toEqual 3
 
+  it 'should calculate average rating with result "?" if presentation ratings are undefined', ->
+    actual = scope.averageRating {}
+    expect(actual).toBeDefined()
+    expect(actual).toEqual '?'
+
+  it 'should update rating', ->
+    scope.updateRating presentation
+    expect(presentation.rating).toEqual 3
+
+  it 'should not update rating if presentation ratings are undefined', ->
+    prez = {}
+    scope.updateRating prez
+    expect(prez.rating).toEqual '?'
+
+  it 'should enrich presentation', ->
+    scope.enrichPresentations [presentation]
+    expect(presentation.rating).toEqual 3
+
+  it 'should attach a list of talks to the scope', ->
+    expect(scope.presentations).toBeDefined()
+    expect(scope.presentations.length).toEqual(1)
+    expect(scope.presentations).toEqualData([presentation])
 
   it 'should return state class to use depending of state value', ->
     expect(scope.stateClass('Deleted')).toEqual('label-inverse')
@@ -33,3 +63,18 @@ describe 'Controller: MainCtrl', ->
 
   it 'should return first 3 letter upper cased', ->
     expect(scope.stateDisplay('Deleted')).toEqual('DEL')
+
+  it 'should return undefined if state is undefined', ->
+    expect(scope.stateDisplay(undefined)).toBeUndefined()
+
+  it 'should return rating class to use depending of rating value', ->
+    expect(scope.ratingClass(5)).toEqual('label-success')
+    expect(scope.ratingClass(3)).toEqual('label-warning')
+    expect(scope.ratingClass(1)).toEqual('label-important')
+    expect(scope.ratingClass('bad input')).toEqual('')
+
+  it 'should return first letter upper cased', ->
+    expect(scope.typeDisplay({name: 'Conference'})).toEqual('C')
+
+  it 'should return undefined if type.name is undefined', ->
+    expect(scope.typeDisplay({})).toBeUndefined()

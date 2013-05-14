@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('cfpReviewApp')
-  .controller('MainCtrlJS', ['$scope', 'TalksService', function ($scope, TalksService) {
-    $scope.talks = TalksService.talks();
+  .controller('MainCtrlJS', ['$scope', 'PresentationsService', function ($scope, PresentationsService) {
+    $scope.presentations = PresentationsService.query();
+
   }]);

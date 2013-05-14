@@ -1,26 +1,110 @@
-<div>
+<div class="span9">
     <h3>Devoxx Call For Papers - Review</h3>
     <table class="table table-striped">
-        <caption>Presentation Search Results (???)</caption>
+        <caption>Presentation Search Results ({{presentations.length}})</caption>
         <thead>
         <tr>
-            <th>id</th>
+            <th><img src="../images/fav_on_16.png" alt="favorite"/></th>
+            <th><img src="../images/checkbox_on.png" alt="invited"/></th>
+            <th><img src="../images/scheduled_on.png" alt="scheduled"/></th>
+            <th>speaker</th>
             <th>title</th>
             <th>type</th>
             <th>state</th>
-            <th>rate</th>
-            <th>voters</th>
+            <th><img src="../images/rating.png" alt="rating"/></th>
+            <th><img src="../images/voters.png" alt="voters"/></th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="t in talks" ng-class="{'success': t.state=='Approved'}" id="talk-{{t.id}}">
-            <td>{{t.id}}</td>
-            <td>{{t.title}}</td>
-            <td>{{t.type}}</td>
+        <tr ng-repeat="t in presentations" ng-class="{'success': stateDisplay(t.state)=='ACC'}" id="presentation-{{t.id}}">
+            <td><input value=" " type="submit" ng-class="{'favorite': t.favorite, 'unfavorite': !t.favorite}"></td>
+            <td><input value=" " type="submit" ng-class="{'invited': t.invited, 'uninvited': !t.invited}"></td>
+            <td><input value=" " type="submit" ng-class="{'scheduled': t.scheduled, 'unscheduled': !t.scheduled}"></td>
+            <td><a href="#">{{t.author.firstname}} {{t.author.lastname}}</a></td>
+            <td><a href="#">{{t.title}}</a></td>
+            <td>{{typeDisplay(t.type)}}</td>
             <td><span class="label" ng-class="stateClass(t.state)">{{stateDisplay(t.state)}}</span></td>
-            <td><rating value="t.rate" max="5"></rating></td>
-            <td>{{t.voters}}</td>
+            <td><span class="label" ng-class="ratingClass(t.rating)">{{t.rating | number:1}}</span></td>
+            <td>{{t.ratings.length}}</td>
         </tr>
         </tbody>
     </table>
+</div>
+<div class="span2">
+    <div>
+        <h3>Welcome Cyril Lakech</h3>
+        <ul>
+            <li><a href="#">Change Password</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+    <form>
+        <fieldset>
+            <legend>Search & Filter</legend>
+            <label>Event</label>
+            <select>
+                <option>Ch'tivoxx France 2014</option>
+                <option>Devoxx France 2013</option>
+            </select>
+            <label>Type</label>
+            <select>
+                <option>Conference</option>
+                <option>University</option>
+                <option>Tools in Action</option>
+                <option>Hands-on Labs</option>
+                <option>BOF</option>
+                <option>Quickie</option>
+            </select>
+            <label>Track</label>
+            <select>
+                <option>Web</option>
+                <option>NoSQL</option>
+                <option>Cloud</option>
+                <option>Java</option>
+                <option>Startup</option>
+                <option>Languages alternatifs</option>
+            </select>
+            <label>State</label>
+            <label class="checkbox">
+                <input type="checkbox"> DELETED
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" checked> REJECTED
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" checked> SUBMITTED
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" checked> ONHOLD
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" checked> BACKUP
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" checked> APPROVED
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" checked> ACCEPTED
+            </label>
+            <label class="checkbox">
+                <input type="checkbox" checked> DECLINED
+            </label>
+            <label class="checkbox">
+                <input type="checkbox"> Already rated (by me)
+            </label>
+            <label class="checkbox">
+                <input type="checkbox"> Only Favorites
+            </label>
+            <label class="checkbox">
+                <input type="checkbox"> Only Invites
+            </label>
+            <label class="checkbox">
+                <input type="checkbox"> With new comments
+            </label>
+            <input type="text" placeholder="Tags (space separated)">
+            <label>Search keywords</label>
+            <input type="text">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </fieldset>
+    </form>
 </div>
