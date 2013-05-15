@@ -1,43 +1,36 @@
 <div class="span9">
     <h3>Devoxx Call For Papers - Review</h3>
     <table class="table table-striped">
-        <caption>Presentation Search Results ({{presentations.length}})</caption>
+        <caption>Presentation Search Results ({{presentations.count}})</caption>
         <thead>
         <tr>
-            <th><img src="../images/fav_on_16.png" alt="favorite"/></th>
-            <th><img src="../images/checkbox_on.png" alt="invited"/></th>
-            <th><img src="../images/scheduled_on.png" alt="scheduled"/></th>
+            <th><img src="/images/fav_on_16.png" alt="favorite"/></th>
+            <th><img src="/images/checkbox_on.png" alt="invited"/></th>
+            <th><img src="/images/scheduled_on.png" alt="scheduled"/></th>
             <th>speaker</th>
             <th>title</th>
             <th>type</th>
             <th>state</th>
-            <th><img src="../images/rating.png" alt="rating"/></th>
-            <th><img src="../images/voters.png" alt="voters"/></th>
+            <th><img src="/images/rating.png" alt="rating"/></th>
+            <th><img src="/images/voters.png" alt="voters"/></th>
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="t in presentations" ng-class="{'success': stateDisplay(t.state)=='ACC'}" id="presentation-{{t.id}}">
-            <td><input value=" " type="submit" ng-class="{'favorite': t.favorite, 'unfavorite': !t.favorite}"></td>
-            <td><input value=" " type="submit" ng-class="{'invited': t.invited, 'uninvited': !t.invited}"></td>
-            <td><input value=" " type="submit" ng-class="{'scheduled': t.scheduled, 'unscheduled': !t.scheduled}"></td>
-            <td><a href="#">{{t.author.firstname}} {{t.author.lastname}}</a></td>
-            <td><a href="#">{{t.title}}</a></td>
-            <td>{{typeDisplay(t.type)}}</td>
-            <td><span class="label" ng-class="stateClass(t.state)">{{stateDisplay(t.state)}}</span></td>
-            <td><span class="label" ng-class="ratingClass(t.rating)">{{t.rating | number:1}}</span></td>
-            <td>{{t.ratings.length}}</td>
+        <tr ng-repeat="p in presentations.results" ng-class="{'success': stateDisplay(p.state)=='ACC'}" id="presentation-{{p.id}}">
+            <td><input value=" " type="submit" ng-class="{'favorite': p.favorite, 'unfavorite': !p.favorite}"></td>
+            <td><input value=" " type="submit" ng-class="{'invited': p.invited, 'uninvited': !p.invited}"></td>
+            <td><input value=" " type="submit" ng-class="{'scheduled': p.scheduled, 'unscheduled': !p.scheduled}"></td>
+            <td><a href="#">{{p.author.firstname}} {{p.author.lastname}}</a></td>
+            <td><a href="#/{{p.id}}">{{p.title}}</a></td>
+            <td>{{typeDisplay(p.type)}}</td>
+            <td><span class="label" ng-class="stateClass(p.state)">{{stateDisplay(p.state)}}</span></td>
+            <td><span class="label" ng-class="ratingClass(p.rating)">{{p.rating | number:1}}</span></td>
+            <td>{{p.ratings.length}}</td>
         </tr>
         </tbody>
     </table>
 </div>
 <div class="span2">
-    <div>
-        <h3>Welcome Cyril Lakech</h3>
-        <ul>
-            <li><a href="#">Change Password</a></li>
-            <li><a href="#">Logout</a></li>
-        </ul>
-    </div>
     <form>
         <fieldset>
             <legend>Search & Filter</legend>

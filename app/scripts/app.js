@@ -7,9 +7,9 @@ angular.module('cfpReviewApp', ['Services', 'ui.bootstrap'])
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/mainUsingJS', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrlJS'
+      .when('/:presentationId', {
+        templateUrl: 'views/presentation.html',
+        controller: 'PresentationCtrl'
       })
       .otherwise({
         redirectTo: '/'

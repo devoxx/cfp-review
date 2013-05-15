@@ -1,5 +1,5 @@
 angular.module('cfpReviewApp').controller 'MainCtrl',
-  ['$scope', 'PresentationsService', ($scope, PresentationsService) ->
+  ['$scope', 'PresentationsService', '$routeParams', ($scope, PresentationsService) ->
     # calculate average rating of a presentation
     $scope.averageRating = (prez) ->
       return '?' if not prez.ratings? or prez.ratings.length == 0
@@ -14,7 +14,7 @@ angular.module('cfpReviewApp').controller 'MainCtrl',
 
     # for each presensation in list calculate average rating
     $scope.enrichPresentations = (presentations) ->
-      $scope.updateRating prez for prez in presentations
+      $scope.updateRating prez for prez in presentations.results
 
     $scope.presentations = PresentationsService.query($scope.enrichPresentations)
 

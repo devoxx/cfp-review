@@ -10,12 +10,14 @@ describe 'Controller: MainCtrl', ->
   scope= {}
   PresentationsService= {}
   presentation = {}
+  presentations = []
 
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
     PresentationsService = {query: jasmine.createSpy('PresentationsService.query')}
     presentation = {ratings: [{percentage: 2},{percentage: 4}]}
-    PresentationsService.query.andReturn([presentation])
+    presentations = {results: [presentation]}
+    PresentationsService.query.andReturn(presentations)
 
     MainCtrl = $controller('MainCtrl', {
       $scope: scope,
@@ -42,13 +44,14 @@ describe 'Controller: MainCtrl', ->
     expect(prez.rating).toEqual '?'
 
   it 'should enrich presentation', ->
-    scope.enrichPresentations [presentation]
+    scope.enrichPresentations presentations
     expect(presentation.rating).toEqual 3
 
   it 'should attach a list of talks to the scope', ->
     expect(scope.presentations).toBeDefined()
-    expect(scope.presentations.length).toEqual(1)
-    expect(scope.presentations).toEqualData([presentation])
+    expect(PresentationsService.query).toHaveBeenCalledWith(scope.enrichPresentations);
+    expect(scope.presentations.results.length).toEqual(1)
+    expect(scope.presentations.results).toEqualData([presentation])
 
   it 'should return state class to use depending of state value', ->
     expect(scope.stateClass('Deleted')).toEqual('label-inverse')

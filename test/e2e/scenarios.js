@@ -9,9 +9,9 @@ describe('Main', function () {
   });
 
   describe('Display presentations', function () {
-    it('should display a list of presentation with only one selected', function () {
+    it('should display a list of presentation', function () {
       expect(element('[id^=presentation-]').count()).toBeGreaterThan(1);
-      expect(element('[id^=presentation-][class*=success]').count()).toEqual(7);
+      expect(element('[id^=presentation-][class*=success]').count()).toEqual(3);
     });
   });
 

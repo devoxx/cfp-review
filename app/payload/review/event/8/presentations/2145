@@ -1,0 +1,198 @@
+{
+  "id": 2145,
+  "version": 8,
+  "title": "Opening opensource : the Jenkins way",
+  "summary": "Jenkins (formerly known as Hudson) is one of the most used tool in Java (non exclusive) to support continuous integration. Created as a hobby project, it quickly became a strategic tool for most development teams. Designed for extensibility, it also choosed from beginning an incremental development model, applying literally the 'release early, release often' principle. It focussed on building a large, active community, with the lowest contribution barrier I ever seen on opensource project and a complete transparency on project management, making Jenkins something uncommon in opensource world. \r\nDuring this session, I'll explain the Jenkins management & technical model, how it promotes contribution and how it allow CloudBees to both support the opensource community-driven project and deliver business value with proprietary extensions.",
+  "extraInfo": null,
+  "type": {
+    "id": 1,
+    "version": 14,
+    "name": "Conference",
+    "description": "<ul>\r\n<li>Each conference talk is 50 minutes long</li>\r\n<li>They're recorded for Parleys.com</li>\r\n<li>Conference speakers receive a full pass.</li>\r\n</ul>",
+    "duration": 60
+  },
+  "state": "ACCEPTED",
+  "track": {
+    "id": 6,
+    "version": 7,
+    "name": "Methodology",
+    "description": "<p>Methodology and anything related.</p>"
+  },
+  "audienceExperience": "NOVICE",
+  "comments": null,
+  "event": null,
+  "author": {
+    "id": 998,
+    "version": 90,
+    "firstname": "nicolas",
+    "lastname": "loof",
+    "username": "ndeloof",
+    "email": "nicolas.deloof@gmail.com",
+    "emailVerified": true,
+    "website": "http://blog.loof.fr",
+    "company": "cloudbees",
+    "imageFile": "thumbnail.gif",
+    "parleysIDs": null,
+    "twitterHandle": null,
+    "speakingReferences": "many French JUGs including ParisJUG, \r\nAgileTour (rennes, nantes, vannes, paris)\r\nJugSummerCamp, BreizhCamp, RivieraDev, Fossa",
+    "country": "FRANCE",
+    "speakerBio": "Nicolas De Loof has been a Java Architect for 14 years in French IT Services companies. Techno-addict and opensource developer, he joined the Apache Maven team in 2007, focussing on Google Web Toolkit plugin, and later the Jenkins community. With many relations in French Java community, he launched in 2008 a Java User Group at Rennes : the BreizhJUG. He also has spoken on conferences about Maven and Software Factory, and actively supports the Java community. He joined CloudBees to contribute an awesome project : run Java in the cloud, from source code to production.",
+    "userType": "SPEAKER",
+    "socialNetworks": null,
+    "loginTokens": null,
+    "presentations": null,
+    "eventTerms": null,
+    "presentationTerms": null,
+    "activationCode": null
+  },
+  "language": {
+    "id": 2,
+    "version": 0,
+    "language": "en",
+    "country": "US",
+    "name": "US_en"
+  },
+  "speakers": [],
+  "schedule": null,
+  "sharedProposal": null,
+  "scheduled": false,
+  "invited": false,
+  "favorite": false,
+  "filePath": null,
+  "ratings": [
+    {
+      "id": 17367,
+      "version": 0,
+      "percentage": 3,
+      "user": {
+        "id": 2,
+        "version": 82,
+        "firstname": "Stephan",
+        "lastname": "Janssen",
+        "username": "stephan",
+        "email": "sja@devoxx.com",
+        "emailVerified": true,
+        "website": "http://www.devoxx.com",
+        "company": "Devoxx",
+        "imageFile": "thumbnail.gif",
+        "parleysIDs": "3524",
+        "twitterHandle": "@Stephan007",
+        "speakingReferences": "JavaPolis, Devoxx, JavaOne, JavaZone, Jazoon, JAOO, ..",
+        "country": "BELGIUM",
+        "speakerBio": "Stephan Janssen is a serial entrepreneur that has founded several successful organizations such as the Belgian Java User Group (BeJUG) in 1996, JCS Int. in 1998, JavaPolis (now Devoxx) in 2001 and recently Parleys.com in 2006.\r\n\r\nHe has been using Java since its early releases in 1995 with experience of developing and implementing real world Java solutions in the finance and manufacturing industries.\r\n\r\nHe was selected by BEA Systems as the first European (independent) BEA Technical Director.\r\n\r\nHe has also been recognized by the Server Side as one of the 54 Who is Who in Enterprise Java 2004.\r\n\r\nSun has recognized in 2005 his efforts for the Java Community and has engaged Stephan in the Java Champion project.\r\n\r\nHe has spoken at numerous Java and JUG conferences around the world.",
+        "userType": "SUPERUSER",
+        "socialNetworks": null,
+        "loginTokens": null,
+        "presentations": null,
+        "eventTerms": null,
+        "presentationTerms": null,
+        "activationCode": null
+      },
+      "presentation": 2145
+    },
+    {
+      "id": 11801,
+      "version": 0,
+      "percentage": 2,
+      "user": null,
+      "presentation": 2145
+    },
+    {
+      "id": 14959,
+      "version": 0,
+      "percentage": 2,
+      "user": {
+        "id": 766,
+        "version": 14,
+        "firstname": "James",
+        "lastname": "McGivern",
+        "username": "jmcgivern",
+        "email": "devoxx@sorrynoremorse.oib.com",
+        "emailVerified": true,
+        "website": "http://www.scansafe.com",
+        "company": "Cisco Cloud Web Security",
+        "imageFile": "thumbnail.gif",
+        "parleysIDs": null,
+        "twitterHandle": "@SorryNoRemorse",
+        "speakingReferences": "Jax London 2012 - Hacking the Kinect\r\nCisco London Developer Conference - A Case of Complexity\r\nAtlassian Partner Conference 2011 - Performance Tuning for the JVM\r\nGeekUp Leeds - various lightening talks",
+        "country": "UNITED_KINGDOM",
+        "speakerBio": "A mathematician turned programmer, James has been working in the software engineer for over 5 years in various industries. He revels in problems that involve data structures or algorithms. Currently working for Cisco's Cloud Web Security group building cloud-based SaaS platform providing real-time threat detection and filtering of internet traffic. James's ambitions are to become a polymath and be a space tourist",
+        "userType": "STEERING",
+        "socialNetworks": null,
+        "loginTokens": null,
+        "presentations": null,
+        "eventTerms": null,
+        "presentationTerms": null,
+        "activationCode": null
+      },
+      "presentation": 2145
+    },
+    {
+      "id": 12745,
+      "version": 0,
+      "percentage": 3,
+      "user": {
+        "id": 2041,
+        "version": 20,
+        "firstname": "Trisha",
+        "lastname": "Gee",
+        "username": "trisha.gee@gmail.com",
+        "email": "trisha.gee@gmail.com",
+        "emailVerified": true,
+        "website": "http://mechanitis.blogspot.com",
+        "company": "10gen",
+        "imageFile": "thumbnail.gif",
+        "parleysIDs": null,
+        "twitterHandle": "@trisha_gee",
+        "speakingReferences": "Leader of the London Java Community and regular presenter there;\r\nLJC Open Conference 2012, 2011\r\nDevoxx 2012, 2011\r\nJAX London 2012, 2011\r\nJavaOne 2012, 2011;\r\nStrangeloop 2012\r\nGOTO Copenhagen & Amsterdam, & QCon London (Disruptor - http://is.gd/dpHpED);\r\nFull list with videos here:\r\nhttp://mechanitis.blogspot.co.uk/p/public-appearances.html",
+        "country": "UNITED_KINGDOM",
+        "speakerBio": "Trisha is a developer at 10gen (the MongoDB company).  She has expertise in Java high performance systems, is passionate about enabling developer productivity, and has a wide breadth of industry experience from the 12 years she's been a professional developer.  Trisha is a leader in the London Java Community, and involved in the Graduate Development Community, she believes we shouldn't all have to make the same mistakes again and again.",
+        "userType": "PROGRAM",
+        "socialNetworks": null,
+        "loginTokens": null,
+        "presentations": null,
+        "eventTerms": null,
+        "presentationTerms": null,
+        "activationCode": null
+      },
+      "presentation": 2145
+    },
+    {
+      "id": 11279,
+      "version": 0,
+      "percentage": 2,
+      "user": null,
+      "presentation": 2145
+    },
+    {
+      "id": 11375,
+      "version": 0,
+      "percentage": 2,
+      "user": null,
+      "presentation": 2145
+    }
+  ],
+  "presentationTerms": null,
+  "tags": [
+    {
+      "id": 302,
+      "version": 0,
+      "name": "jenkins"
+    },
+    {
+      "id": 301,
+      "version": 0,
+      "name": "cloudbees"
+    },
+    {
+      "id": 213,
+      "version": 0,
+      "name": "FOSS"
+    }
+  ],
+  "presentationFeedbacks": null,
+  "wikiPageName": "Opening opensource   the Jenkins way",
+  "presentationState": "ACCEPTED",
+  "wikiTitle": "Opening opensource   the Jenkins way",
+  "smallTitle": "Opening opensource : the Jenkins way by Nicolas Loof"
+}
