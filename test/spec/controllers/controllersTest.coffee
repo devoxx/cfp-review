@@ -27,7 +27,7 @@ describe 'Controller: MainCtrl', ->
     events = [event]
     EventsService.query.andReturn(events)
 
-    $httpBackend.expectGET(new RegExp(ConfigAPI.endPoint + "/proposal/event")).respond(events);
+    $httpBackend.expectGET(new RegExp(ConfigAPI.endPoint + "/proposal/event")).respond(events)
 
     MainCtrl = $controller('MainCtrl', {
       $scope: scope,
@@ -61,7 +61,7 @@ describe 'Controller: MainCtrl', ->
 
   it 'should attach a list of talks to the scope', ->
     expect(scope.presentations).toBeDefined()
-    expect(PresentationsService.query).toHaveBeenCalledWith(scope.enrichPresentations);
+    expect(PresentationsService.query).toHaveBeenCalledWith(scope.enrichPresentations)
     expect(scope.presentations.results.length).toEqual(1)
     expect(scope.presentations.results).toEqualData([presentation])
 

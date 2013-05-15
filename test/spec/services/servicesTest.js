@@ -13,6 +13,7 @@ describe('Service: Services', function () {
   });
 
   var PresentationsService,
+    PresentationService,
     EventsService,
     ConfigAPI,
     expected = {results: [
@@ -27,8 +28,9 @@ describe('Service: Services', function () {
       }
     ];
 
-  beforeEach(inject(function (_PresentationsService_, _EventsService_, _ConfigAPI_) {
+  beforeEach(inject(function (_PresentationsService_, _EventsService_, _ConfigAPI_, _PresentationService_) {
     PresentationsService = _PresentationsService_;
+    PresentationService = _PresentationService_;
     EventsService = _EventsService_;
     ConfigAPI = _ConfigAPI_
   }));
@@ -52,6 +54,19 @@ describe('Service: Services', function () {
       respond(expected);
 
     var actual = PresentationsService.query({eventId: 'X'});
+
+    $httpBackend.flush();
+
+    expect(actual).toBeDefined();
+    expect(actual).toEqualData(expected);
+  }));
+
+  it('should get a presentation for event X', inject(function ($httpBackend) {
+
+    $httpBackend.expectGET(new RegExp(ConfigAPI.endPoint + "/review/event/8/presentation/123")).
+      respond(expected);
+
+    var actual = PresentationService.get({ presentationId : 123, eventId : 8 });
 
     $httpBackend.flush();
 
