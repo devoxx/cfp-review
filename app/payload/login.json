@@ -1,0 +1,32 @@
+{
+  "id": 2665,
+  "version": 2,
+  "firstname": "Cyril",
+  "lastname": "Lakech",
+  "username": "cyrillakech",
+  "email": "cyril.lakech@adeoservices.com",
+  "emailVerified": true,
+  "website": null,
+  "company": "na",
+  "imageFile": "",
+  "parleysIDs": null,
+  "twitterHandle": null,
+  "speakingReferences": "na",
+  "country": "BELGIUM",
+  "speakerBio": "na",
+  "userType": "SUPERUSER",
+  "socialNetworks": null,
+  "loginTokens": [
+    {
+      "id": null,
+      "version": null,
+      "user": 2665,
+      "expires": "2013-05-21T22:32:49.744+0000",
+      "token": "8a3e49943ea18167013ea52cb1503d1a"
+    }
+  ],
+  "presentations": null,
+  "eventTerms": null,
+  "presentationTerms": null,
+  "activationCode": null
+}
