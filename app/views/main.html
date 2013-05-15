@@ -36,8 +36,7 @@
             <legend>Search & Filter</legend>
             <label>Event</label>
             <select>
-                <option>Ch'tivoxx France 2014</option>
-                <option>Devoxx France 2013</option>
+                <option ng-repeat="e in events">{{e.name}}</option>
             </select>
             <label>Type</label>
             <select>
