@@ -1,225 +1,313 @@
-<div class="span12">
-<h3>{{presentation.title}}</h3>
+<div class="span10">
+<article>
 
-<form class="form-horizontal">
-    <div class="control-group">
-        <label class="control-label">Event name here {{presentation.event.name}}</label>
-        <div class="controls">
-            <select>
-                <option>{{presentation.type.name}}</option>
-            </select>
-            <select>
-                <option>{{presentation.track.name}}</option>
-            </select>
-            ({{presentation.language.language}})
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Summary</label>
-        <div class="controls">
-            <pre>{{presentation.summary}}</pre>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Audience</label>
-        <div class="controls">
-            <span class="label">{{presentation.audienceExperience}}</span>
-        </div>
-    </div>
-</form>
-
-<hr>
-
-<h4>Author</h4>
-
-<form class="form-horizontal">
-    <div class="control-group">
-        <label class="control-label">About</label>
-        <div class="controls">
-            <img ng-src="{{presentation.author.imageFile}}" alt="author image"> {{presentation.author.firstname}}
-            {{presentation.author.lastname}} ({{presentation.author.company}})
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Bio</label>
-        <div class="controls">
-            <pre>{{presentation.author.speakerBio}}</pre>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">References</label>
-        <div class="controls">
-            <pre>{{presentation.author.speakingReferences}}</pre>
-        </div>
-    </div>
-</form>
-
-<hr>
-
-<h4>Other Speakers</h4>
-
-<form class="form-horizontal" ng-repeat="other in presentation.speakers">
-    <div class="control-group">
-        <label class="control-label">About</label>
-
-        <div class="controls">
-            <a class="btn" href="#"><i class="icon-trash"></i> Delete</a>
-            <img ng-src="{{other.imageFile}}" alt="author image"> {{other.firstname}} {{other.lastname}}
-            ({{other.company}})
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Bio</label>
-
-        <div class="controls">
-            <pre>{{other.speakerBio}}</pre>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">References</label>
-
-        <div class="controls">
-            <pre>{{other.speakingReferences}}</pre>
-        </div>
-    </div>
-</form>
-
-<form class="form-horizontal">
-    <div class="control-group">
-        <label class="control-label">Add speaker</label>
-        <div class="controls">
-            <input type="text" placeholder="add speaker username here">
-        </div>
-    </div>
-</form>
-
-<hr>
-
-<h4>Tags</h4>
-<ul class="unstyled">
-    <li ng-repeat="tag in presentation.tags"><a href="#"><i class="icon-trash"></i></a> {{tag.name}}</li>
-</ul>
-
-<form class="form-horizontal">
-    <div class="control-group">
-        <label class="control-label">Add tag</label>
-        <div class="controls">
-            <input type="text" placeholder="add a new tag here">
-        </div>
-    </div>
-</form>
-
-<hr>
-
-<h4>Status</h4>
-
-<form class="form-horizontal">
-    <div class="control-group">
-        <label class="control-label">Rating</label>
-        <div class="controls">
-            <label><span class="label label-success">3.5</span> Rate <span class="label label-inverse">0</span> <span class="label label-important">1</span> <span class="label label-important">2</span> <span class="label label-warning">3</span> <span class="label label-success">4</span> <span class="label label-success">5</span> (1 is bad, 5 is excellent, 0 for no vote)</label>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Schedulable</label>
-        <div class="controls">
-            <label class="checkbox">
-                <input type="checkbox"> (Make this talk available for scheduling)
-            </label>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Invited</label>
-        <div class="controls">
-            <label class="checkbox">
-                <input type="checkbox">
-            </label>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Favorite</label>
-        <div class="controls">
-            <label class="checkbox">
-                <input type="checkbox">
-            </label>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">ScheduleCode</label>
-        <div class="controls">
-            {{presentation.schedule.itemCode}}
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">State</label>
-        <div class="controls">
-            <span class="label">{{presentation.state}}</span>
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Submitted</label>
-        <div class="controls">
-            2012-11-20
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label">Last Modified</label>
-        <div class="controls">
-            2013-02-19
-        </div>
-    </div>
-    <div class="control-group">
-        <label class="control-label"></label>
-        <div class="controls">
-            <button type="button" class="btn">Update</button>
-        </div>
-    </div>
-</form>
-
-<hr>
-
-<h4>Other submissions</h4>
-
-<table class="table table-striped" ng-show="presentation.otherPresentations">
-    <thead>
-    <tr>
-        <th>title</th>
-        <th>type</th>
-        <th>state</th>
-        <th><img src="/images/rating.png" alt="rating"/></th>
-        <th><img src="/images/voters.png" alt="voters"/></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="p in presentation.otherPresentations">
-        <td><a href="#/{{p.id}}">{{p.title}}</a></td>
-        <td>{{typeDisplay(p.type)}}</td>
-        <td><span class="label" ng-class="stateClass(p.state)">{{stateDisplay(p.state)}}</span></td>
-        <td><span class="label" ng-class="ratingClass(p.rating)">{{p.rating | number:1}}</span></td>
-        <td>{{p.ratings.length}}</td>
-    </tr>
-    </tbody>
-</table>
-
-<hr>
-
-<h4>Speaker Questions and Feedback</h4>
-
-<hr>
-
-<h4>Comments</h4>
-
-<div ng-repeat="comment in presentation.comments">
-
+<div class="page-header">
+    <h3>{{presentation.title}}
+        <small><span class="label pull-right">{{presentation.state}}</span></small>
+    </h3>
 </div>
 
-<form class="form-horizontal">
-    <div class="control-group">
-        <label class="control-label">Add comment</label>
-        <div class="controls">
-            <textarea rows=3></textarea>
+<header>
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">Event name here {{presentation.event.name}}</label>
+
+            <div class="controls">
+                <select>
+                    <option>{{presentation.type.name}}</option>
+                </select>
+                <select>
+                    <option>{{presentation.track.name}}</option>
+                </select>
+                ({{presentation.language.language}})
+            </div>
         </div>
+    </form>
+</header>
+
+<hr>
+
+<section>
+    <h4>Presentation</h4>
+
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">Summary</label>
+
+            <div class="controls">
+                <pre>{{presentation.summary}}</pre>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Audience</label>
+
+            <div class="controls">
+                <span class="label">{{presentation.audienceExperience}}</span>
+            </div>
+        </div>
+    </form>
+</section>
+
+<hr>
+
+<section>
+
+    <h4>Author</h4>
+
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">About</label>
+
+            <div class="controls">
+                <img ng-src="{{presentation.author.imageFile}}" alt="author image"> {{presentation.author.firstname}}
+                {{presentation.author.lastname}} ({{presentation.author.company}})
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Bio</label>
+
+            <div class="controls">
+                <pre>{{presentation.author.speakerBio}}</pre>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">References</label>
+
+            <div class="controls">
+                <pre>{{presentation.author.speakingReferences}}</pre>
+            </div>
+        </div>
+    </form>
+</section>
+
+<hr>
+
+<section>
+
+    <h4>Other Speakers</h4>
+
+    <form class="form-horizontal" ng-repeat="other in presentation.speakers">
+        <div class="control-group">
+            <label class="control-label">About</label>
+
+            <div class="controls">
+                <a class="btn" href="#"><i class="icon-trash"></i> Delete</a>
+                <img ng-src="{{other.imageFile}}" alt="author image"> {{other.firstname}} {{other.lastname}}
+                ({{other.company}})
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Bio</label>
+
+            <div class="controls">
+                <pre>{{other.speakerBio}}</pre>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">References</label>
+
+            <div class="controls">
+                <pre>{{other.speakingReferences}}</pre>
+            </div>
+        </div>
+    </form>
+
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">Add speaker</label>
+
+            <div class="controls">
+                <input type="text" placeholder="add speaker username here">
+            </div>
+        </div>
+    </form>
+
+</section>
+
+<hr>
+
+<section>
+
+    <h4>Tags</h4>
+    <ul class="unstyled">
+        <li ng-repeat="tag in presentation.tags"><a href="#"><i class="icon-trash"></i></a> <span class="label">{{tag.name}}</span>
+        </li>
+    </ul>
+
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">Add tag</label>
+
+            <div class="controls">
+                <input type="text" placeholder="add a new tag here">
+            </div>
+        </div>
+    </form>
+
+</section>
+
+<hr>
+
+<section>
+
+    <h4>Status</h4>
+
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">Rating</label>
+
+            <div class="controls">
+                <span class="label label-success">4.2</span>
+                Rate
+                <span class="label label-important">0</span>
+                <span class="label label-important">1</span>
+                <span class="label label-warning">2</span>
+                <span class="label label-warning">3</span>
+                <span class="label label-success">4</span>
+                <span class="label label-success">5</span>
+                (1 is bad, 5 is excellent, 0 for no vote)
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Schedulable</label>
+
+            <div class="controls">
+                <label class="checkbox">
+                    <input type="checkbox"> (Make this talk available for scheduling)
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Invited</label>
+
+            <div class="controls">
+                <label class="checkbox">
+                    <input type="checkbox">
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Favorite</label>
+
+            <div class="controls">
+                <label class="checkbox">
+                    <input type="checkbox">
+                </label>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">ScheduleCode</label>
+
+            <div class="controls">
+                {{presentation.schedule.itemCode}}
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">State</label>
+
+            <div class="controls">
+                <span class="label">{{presentation.state}}</span>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Submitted</label>
+
+            <div class="controls">
+                2012-11-20
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">Last Modified</label>
+
+            <div class="controls">
+                2013-02-19
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label"></label>
+
+            <div class="controls">
+                <button type="button" class="btn">Update</button>
+            </div>
+        </div>
+    </form>
+
+</section>
+
+<hr>
+
+<section>
+
+    <h4>Other submissions</h4>
+
+    <table class="table table-striped" ng-show="presentation.otherPresentations">
+        <thead>
+        <tr>
+            <th>title</th>
+            <th>type</th>
+            <th>state</th>
+            <th><img src="/images/rating.png" alt="rating"/></th>
+            <th><img src="/images/voters.png" alt="voters"/></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="p in presentation.otherPresentations">
+            <td><a href="#/{{p.id}}">{{p.title}}</a></td>
+            <td>{{typeDisplay(p.type)}}</td>
+            <td><span class="label" ng-class="stateClass(p.state)">{{stateDisplay(p.state)}}</span></td>
+            <td><span class="label" ng-class="ratingClass(p.rating)">{{p.rating | number:1}}</span></td>
+            <td>{{p.ratings.length}}</td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+
+<hr>
+
+<section>
+    <h4>Speaker Questions and Feedback</h4>
+</section>
+
+<hr>
+
+<section>
+    <h4>Comments</h4>
+
+    <div ng-repeat="comment in presentation.comments">
+
     </div>
-</form>
+
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label">Add comment</label>
+
+            <div class="controls">
+                <textarea rows=3></textarea>
+            </div>
+        </div>
+    </form>
+</section>
+
+</article>
+</div>
+
+<div class="span2" style="text-align: center">
+
+    <div class="affix">
+
+        <h3> Rating: <label class="badge badge-success"><h1>4.2</h1></label></h3>
+
+        <h3>Rate it !</h3>
+
+        <div class="btn-group btn-group-vertical ">
+            <button type="button" class="btn btn-large btn-success" ng-model="rateVal5" btn-checkbox><h1>5</h1></button>
+            <button type="button" class="btn btn-large btn-success" ng-model="rateVal4" btn-checkbox><h1>4</h1></button>
+            <button type="button" class="btn btn-large btn-warning" ng-model="rateVal3" btn-checkbox><h1>3</h1></button>
+            <button type="button" class="btn btn-large btn-warning" ng-model="rateVal2" btn-checkbox><h1>2</h1></button>
+            <button type="button" class="btn btn-large btn-danger" ng-model="rateVal1" btn-checkbox><h1>1</h1></button>
+            <button type="button" class="btn btn-large btn-danger" ng-model="rateVal0" btn-checkbox><h1>0</h1></button>
+        </div>
+
+    </div>
 
 </div>
