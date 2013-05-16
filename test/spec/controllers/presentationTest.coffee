@@ -1,4 +1,4 @@
-describe 'Controller: MainCtrl', ->
+describe 'Controller: PresentationCtrl', ->
   beforeEach module 'cfpReviewApp'
   beforeEach ->
     this.addMatchers {
@@ -11,7 +11,7 @@ describe 'Controller: MainCtrl', ->
   PresentationService= {}
   presentation = {}
 
-  beforeEach inject ($controller, $rootScope, $httpBackend, ConfigAPI) ->
+  beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
     PresentationService = {get: jasmine.createSpy('PresentationService.get')}
     presentation = {ratings: [{percentage: 2},{percentage: 4}]}
@@ -19,7 +19,7 @@ describe 'Controller: MainCtrl', ->
 
     PresentationCtrl = $controller('PresentationCtrl', {
       $scope: scope,
-      PresentationsService: PresentationService,
+      PresentationService: PresentationService,
       $routeParams: {presentationId: 123}
     });
 

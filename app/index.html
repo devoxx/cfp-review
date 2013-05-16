@@ -1,9 +1,13 @@
 <!doctype html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-  <head>
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Devoxx Call For Papers - Review</title>
@@ -15,67 +19,83 @@
     <link rel="stylesheet" href="styles/bootstrap-responsive.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-  </head>
-  <body ng-app="cfpReviewApp">
-    <!--[if lt IE 7]>
-      <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
-    <![endif]-->
+</head>
+<body ng-app="cfpReviewApp">
+<!--[if lt IE 7]>
+<p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser
+    today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better
+    experience this site.</p>
+<![endif]-->
 
-    <!--[if lt IE 9]>
-      <script src="components/es5-shim/es5-shim.js"></script>
-      <script src="components/json3/lib/json3.min.js"></script>
-    <![endif]-->
+<!--[if lt IE 9]>
+<script src="components/es5-shim/es5-shim.js"></script>
+<script src="components/json3/lib/json3.min.js"></script>
+<![endif]-->
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="brand" href="#">Devoxx Call For Papers - Review</a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li><a href="#/">Home</a></li>
-                    </ul>
-                    <ul class="nav pull-right">
-                        <li class="divider-vertical"></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome Dear Guest <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Change Password</a></li>
-                                <li><a href="#">Logout</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row" ng-view></div>
-    </div>
-
-    <div id="footer">
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
         <div class="container">
-            <div class="muted-credit">Copyright Devoxx 2013
-                <a href="http://www.cloudbees.com">
-                    <img src="images/Button-Powered-by-CB.png" alt="Powered by CloudBees" border="0"/>
-                </a>
+            <a class="brand" href="#">Devoxx Call For Papers - Review</a>
+
+            <div class="nav-collapse collapse" ng-controller="AuthenticationCtrl">
+                <ul class="nav">
+                    <li><a href="#/">Home</a></li>
+                </ul>
+                <ul class="nav pull-right" ng-show="user">
+                    <li class="divider-vertical"></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome {{user.firstname}} {{user.lastname}} <b
+                                class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Change Password</a></li>
+                            <li><a href="#">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav pull-right" ng-hide="user">
+                    <li>
+                        <input type="text" class="input-medium btn-group" ng-model="emailOrUsername" placeholder="Email or Username">
+                    </li>
+                    <li>
+                        <input type="password" class="input-small btn-group" ng-model="password" placeholder="Password">
+                    </li>
+                    <li>
+                        <button class="btn" ng-click="login()">Log in</button>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
+</div>
 
-    <script src="components/angular/angular.js"></script>
-    <script src="components/angular-resource/angular-resource.js"></script>
-    <script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<div class="container">
+    <div class="row" ng-view></div>
+</div>
 
-    <!-- build:js scripts/scripts.js -->
-    <script src="scripts/app.js"></script>
-    <script src="scripts/config.js"></script>
-    <script src="scripts/services/services.js"></script>
-    <!-- endbuild -->
+<div id="footer">
+    <div class="container">
+        <div class="muted-credit">Copyright Devoxx 2013
+            <a href="http://www.cloudbees.com">
+                <img src="images/Button-Powered-by-CB.png" alt="Powered by CloudBees" border="0"/>
+            </a>
+        </div>
+    </div>
+</div>
 
-    <!-- build:js(.tmp) scripts/scriptsCoffee.js -->
-    <script src="scripts/controllers/controllers.js"></script>
-    <script src="scripts/controllers/presentation.js"></script>
-    <!-- endbuild -->
-  </body>
+<script src="components/angular/angular.js"></script>
+<script src="components/angular-resource/angular-resource.js"></script>
+<script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
+<!-- build:js scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/config.js"></script>
+<script src="scripts/services/services.js"></script>
+<!-- endbuild -->
+
+<!-- build:js(.tmp) scripts/scriptsCoffee.js -->
+<script src="scripts/controllers/controllers.js"></script>
+<script src="scripts/controllers/presentation.js"></script>
+<script src="scripts/controllers/authentification.js"></script>
+<!-- endbuild -->
+</body>
 </html>

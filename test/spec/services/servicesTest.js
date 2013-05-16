@@ -14,6 +14,7 @@ describe('Service: Services', function () {
 
   var PresentationsService,
     PresentationService,
+    AuthenticationService,
     EventsService,
     ConfigAPI,
     expected = {results: [
@@ -26,12 +27,14 @@ describe('Service: Services', function () {
       {
         "expectedData": 123
       }
-    ];
+    ],
+    expectedUser = {firstname: 'Vlad'};
 
-  beforeEach(inject(function (_PresentationsService_, _EventsService_, _ConfigAPI_, _PresentationService_) {
+  beforeEach(inject(function (_PresentationsService_, _EventsService_, _ConfigAPI_, _PresentationService_, _AuthenticationService_) {
     PresentationsService = _PresentationsService_;
     PresentationService = _PresentationService_;
     EventsService = _EventsService_;
+    AuthenticationService = _AuthenticationService_,
     ConfigAPI = _ConfigAPI_
   }));
 
@@ -87,4 +90,19 @@ describe('Service: Services', function () {
     expect(actual).toEqualData(expectedEvent);
   }));
 
+
+  it('should get an user on login', inject(function ($httpBackend) {
+
+    $httpBackend.expectPOST(new RegExp(ConfigAPI.endPoint + "/auth/login")).
+      respond(expectedUser);
+
+    var actual = AuthenticationService.login('vlad', 'imir').then(function (user) {
+      actual = user;
+    });
+
+    $httpBackend.flush();
+
+    expect(actual).toBeDefined();
+    expect(actual).toEqualData(expectedUser);
+  }));
 });
