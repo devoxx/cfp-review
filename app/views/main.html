@@ -35,9 +35,7 @@
         <fieldset>
             <legend>Search & Filter</legend>
             <label>Event</label>
-            <select>
-                <option ng-repeat="e in events">{{e.name}}</option>
-            </select>
+            <select ng-options="e.name for e in events">
             <label>Type</label>
             <select>
                 <option>Conference</option>
