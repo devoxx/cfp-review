@@ -5,3 +5,4 @@ coverage
 node_modules
 .tmp
 *.iml
+.DS_Store
