@@ -1,26 +1,26 @@
-<!doctype html>
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Devoxx Call For Papers - Review</title>
-    <meta name="description" content="Devoxx Call For Papers - Review">
+    <title>DEVOXX - CFP - Review</title>
+    <meta name="description" content="DEVOXX - Call For Papers - Review">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css styles/main.css -->
-    <link rel="stylesheet" href="styles/bootstrap.css">
-    <link rel="stylesheet" href="styles/bootstrap-responsive.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="components/cfp-speaker/src/main/webapp/css/normalize.css">
+    <link rel="stylesheet" href="components/cfp-speaker/src/main/webapp/css/grid.css">
+    <link rel="stylesheet" href="components/cfp-speaker/src/main/webapp/css/main.css">
+    <link rel="stylesheet" href="components/cfp-speaker/src/main/webapp/css/uniform.css">
     <!-- endbuild -->
 </head>
-<body ng-app="cfpReviewApp">
+
+<body class="front" ng-app="cfpReviewApp">
 <!--[if lt IE 7]>
 <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser
     today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better
@@ -32,64 +32,135 @@
 <script src="components/json3/lib/json3.min.js"></script>
 <![endif]-->
 
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="brand" href="#">Devoxx Call For Papers - Review</a>
+<header>
+    <div class="grid">
 
-            <div class="nav-collapse collapse" ng-controller="AuthenticationCtrl">
-                <ul class="nav">
-                    <li><a href="#/">Home</a></li>
-                </ul>
-                <ul class="nav pull-right" ng-show="user">
-                    <li class="divider-vertical"></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome {{user.firstname}} {{user.lastname}} <b
-                                class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Change Password</a></li>
-                            <li><a href="#">Logout</a></li>
+        <div class="row">
+            <div class="col7">
+
+                <a href="#"><img src="images/devoxx_logo.gif"></a>
+
+            </div>
+
+            <nav class="col13">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li class="submenu subleft">
+                        <a href="#">Program</a>
+                        <ul>
+                            <li><a href="schedule.html">Schedule</a></li>
+                            <li><a href="speakers.html">Speakers</a></li>
                         </ul>
                     </li>
+                    <li class="submenu subright"><a href="#">Practical</a>
+                        <ul>
+                            <li><a href="faq.html">FAQ</a></li>
+                            <li><a href="team.html">Team</a></li>
+                            <li><a href="venue.html">Venue</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </li>
+                    <li class="btn hide_mobile">
+                        <a href="#">Buy tickets</a>
+                    </li>
+                        <span ng-controller="LoginCtrl">
+                            <li class="btn popup login btn_grey"  ng-hide="currentUser()">
+                                <a href="#">Login</a>
+                                <div class="popup" >
+                                    <form>
+                                        <input type="text" name="login" value="" placeholder="E-mail" ng-model="model.email" />
+                                        <input type="password" name="pass" value="" placeholder="Password" ng-model="model.password" devoxx-on-return-key="login()"/>
+                                        <a href="#">Register</a>
+                                        <input type="submit" name="submit" value="Login" class="btn" ng-click="login()"/>
+                                    </form>
+                                </div>
+                            </li>
+                            <li class="submenu subright"  ng-show="currentUser()">
+                                <a href="#">User (icon)</a>
+                                <ul>
+                                    <li><a href="#" ng-click="logout()">Logout</a></li>
+                                    <li><a href="#/speaker/proposals">Proposals</a></li>
+                                    <li><a href="#">Review</a></li>
+                                    <li><a href="#">Admin</a></li>
+                                    <li><a href="#/profile">Profile</a></li>
+                                </ul>
+                            </li>
+                        </span>
+
+                    <li class="popup search">
+                        <a href="#">Search</a>
+                        <div class="popup">
+                            <form>
+                                <input type="text" name="search" value="" placeholder="search..." />
+                            </form>
+
+                            <ol>
+                                <li>
+                                    <a href="#">
+                                        <img src="images_dummy/search_icon1_dummy.jpg" alt="" />
+                                        <div class="title">Lorum ipsum dolor</div>
+                                        <div class="subtitle">Mobi leo risus</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="images_dummy/search_icon2_dummy.jpg" alt="" />
+                                        <div class="title">Lorum ipsum dolor</div>
+                                        <div class="subtitle">Mobi leo risus</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="images_dummy/search_icon2_dummy.jpg" alt="" />
+                                        <div class="title">Lorum ipsum dolor</div>
+                                        <div class="subtitle">Mobi leo risus</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="images_dummy/search_icon1_dummy.jpg" alt="" />
+                                        <div class="title">Lorum ipsum dolor</div>
+                                        <div class="subtitle">Mobi leo risus</div>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="images_dummy/search_icon2_dummy.jpg" alt="" />
+                                        <div class="title">Lorum ipsum dolor</div>
+                                        <div class="subtitle">Mobi leo risus</div>
+                                    </a>
+                                </li>
+                            </ol>
+                        </div>
+                    </li>
                 </ul>
-                <ul class="nav pull-right" ng-hide="user">
-                    <li>
-                        <input type="text" class="input-medium btn-group" ng-model="emailOrUsername" placeholder="Email or Username">
-                    </li>
-                    <li>
-                        <input type="password" class="input-small btn-group" ng-model="password" placeholder="Password">
-                    </li>
-                    <li>
-                        <button class="btn" ng-click="login()">Log in</button>
-                    </li>
-                </ul>
-            </div>
+            </nav>
         </div>
+
     </div>
-</div>
+    <div id="submenu">
+
+    </div>
+</header>
 
 <div class="container">
     <div class="row" ng-view></div>
 </div>
 
-<div id="footer">
-    <div class="container">
-        <div class="muted-credit">Copyright Devoxx 2013
-            <a href="http://www.cloudbees.com">
-                <img src="images/Button-Powered-by-CB.png" alt="Powered by CloudBees" border="0"/>
-            </a>
-        </div>
-    </div>
-</div>
-
-<script src="components/angular/angular.js"></script>
-<script src="components/angular-resource/angular-resource.js"></script>
+<script src="components/unstable-angular-complete/angular.js"></script>
+<script src="components/unstable-angular-complete/angular-resource.js"></script>
+<script src="components/unstable-angular-complete/angular-cookies.js"></script>
 <script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="components/jquery/jquery.js"></script>
+<script src="components/bxslider-4/jquery.bxslider.js"></script>
+<script src="components/jquery.uniform/jquery.uniform.js"></script>
+<script src="components/cfp-speaker/src/main/webapp/js/main.js"></script>
 
 <!-- build:js scripts/scripts.js -->
 <script src="scripts/app.js"></script>
 <script src="scripts/config.js"></script>
 <script src="scripts/services/services.js"></script>
+<script src="components/cfp-speaker/src/main/webapp/js/services.js"></script>
 <!-- endbuild -->
 
 <!-- build:js(.tmp) scripts/scriptsCoffee.js -->

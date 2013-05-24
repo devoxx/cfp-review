@@ -14,33 +14,25 @@ describe('Service: Services', function () {
 
   var PresentationsService,
     PresentationService,
-    AuthenticationService,
-    EventsService,
+    EventService,
     ConfigAPI,
     expected = {results: [
       {
         "expectedData": 123
       }
     ]
-    },
-    expectedEvent = [
-      {
-        "expectedData": 123
-      }
-    ],
-    expectedUser = {firstname: 'Vlad'};
+    };
 
-  beforeEach(inject(function (_PresentationsService_, _EventsService_, _ConfigAPI_, _PresentationService_, _AuthenticationService_) {
+  beforeEach(inject(function (_PresentationsService_, _EventService_, _ConfigAPI_, _PresentationService_) {
     PresentationsService = _PresentationsService_;
     PresentationService = _PresentationService_;
-    EventsService = _EventsService_;
-    AuthenticationService = _AuthenticationService_,
+    EventService = _EventService_;
     ConfigAPI = _ConfigAPI_
   }));
 
   it('should get a presentation list', inject(function ($httpBackend) {
 
-    $httpBackend.expectGET(new RegExp(ConfigAPI.endPoint + "/review/event/presentations")).
+    $httpBackend.expectGET(new RegExp(ConfigAPI.endPoint + "/review/event/8/presentations")).
       respond(expected);
 
     var actual = PresentationsService.query();
@@ -77,32 +69,4 @@ describe('Service: Services', function () {
     expect(actual).toEqualData(expected);
   }));
 
-  it('should get an event list', inject(function ($httpBackend) {
-
-    $httpBackend.expectGET(new RegExp(ConfigAPI.endPoint + "/proposal/event")).
-      respond(expectedEvent);
-
-    var actual = EventsService.query();
-
-    $httpBackend.flush();
-
-    expect(actual).toBeDefined();
-    expect(actual).toEqualData(expectedEvent);
-  }));
-
-
-  it('should get an user on login', inject(function ($httpBackend) {
-
-    $httpBackend.expectPOST(new RegExp(ConfigAPI.endPoint + "/auth/login")).
-      respond(expectedUser);
-
-    var actual = AuthenticationService.login('vlad', 'imir').then(function (user) {
-      actual = user;
-    });
-
-    $httpBackend.flush();
-
-    expect(actual).toBeDefined();
-    expect(actual).toEqualData(expectedUser);
-  }));
 });

@@ -9,32 +9,20 @@ describe 'Controller: MainCtrl', ->
   MainCtrl= {}
   scope= {}
   PresentationsService= {}
-  EventsService= {}
   presentation = {}
-  event = {}
   presentations = []
-  events = []
 
-  beforeEach inject ($controller, $rootScope, $httpBackend, ConfigAPI) ->
+  beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
     PresentationsService = {query: jasmine.createSpy('PresentationsService.query')}
     presentation = {ratings: [{percentage: 2},{percentage: 4}]}
     presentations = {results: [presentation]}
     PresentationsService.query.andReturn(presentations)
 
-    EventsService = {query: jasmine.createSpy('EventsService.query')}
-    event = {name: "Sample"}
-    events = [event]
-    EventsService.query.andReturn(events)
-
-    $httpBackend.expectGET(new RegExp(ConfigAPI.endPoint + "/proposal/event")).respond(events)
-
     MainCtrl = $controller('MainCtrl', {
       $scope: scope,
       PresentationsService: PresentationsService
     });
-
-    $httpBackend.flush()
 
   it 'should calculate average rating on a presentation', ->
     actual = scope.averageRating presentation
