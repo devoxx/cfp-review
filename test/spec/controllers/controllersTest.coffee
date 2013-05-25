@@ -9,7 +9,7 @@ describe 'Controller: MainCtrl', ->
   MainCtrl= {}
   scope= {}
   rootScope= {}
-  PresentationsService= {}
+  PresentationService= {}
   EventsService= {}
   presentation = {}
   event = {}
@@ -21,10 +21,10 @@ describe 'Controller: MainCtrl', ->
     scope = $rootScope.$new()
     scope.defaultEvent =
       id: 8
-    PresentationsService = {query: jasmine.createSpy('PresentationsService.query')}
+    PresentationService = {query: jasmine.createSpy('PresentationService.query')}
     presentation = {ratings: [{percentage: 2},{percentage: 4}]}
     presentations = {results: [presentation]}
-    PresentationsService.query.andReturn(presentations)
+    PresentationService.query.andReturn(presentations)
 
     EventsService = {query: jasmine.createSpy('EventsService.query')}
     event = {name: "Sample"}
@@ -33,7 +33,7 @@ describe 'Controller: MainCtrl', ->
 
     MainCtrl = $controller('MainCtrl', {
       $scope: scope,
-      PresentationsService: PresentationsService
+      PresentationService: PresentationService
     });
 
   it 'should calculate average rating on a presentation', ->
@@ -62,7 +62,7 @@ describe 'Controller: MainCtrl', ->
   it 'should attach a list of talks to the scope', ->
     rootScope.$broadcast('APP_LOADED')
     expect(scope.presentations).toBeDefined()
-    expect(PresentationsService.query).toHaveBeenCalledWith({eventId: 8}, scope.enrichPresentations)
+    expect(PresentationService.query).toHaveBeenCalledWith({eventId: 8}, scope.enrichPresentations)
     expect(scope.presentations.results.length).toEqual(1)
     expect(scope.presentations.results).toEqualData([presentation])
 

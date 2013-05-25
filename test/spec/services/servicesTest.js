@@ -12,7 +12,7 @@ describe('Service: Services', function () {
         });
     });
 
-    var PresentationsService, PresentationService, UserService, EventsService, ConfigAPI,
+    var PresentationService, UserService, EventsService, ConfigAPI,
         expected = {results: [
             {
                 'expectedData': 123
@@ -26,8 +26,7 @@ describe('Service: Services', function () {
         ],
         expectedUser = {firstname: 'Vlad'};
 
-    beforeEach(inject(function (_PresentationsService_, _EventsService_, _ConfigAPI_, _PresentationService_, _UserService_) {
-        PresentationsService = _PresentationsService_;
+    beforeEach(inject(function (_EventsService_, _ConfigAPI_, _PresentationService_, _UserService_) {
         PresentationService = _PresentationService_;
         EventsService = _EventsService_;
         UserService = _UserService_;
@@ -38,7 +37,7 @@ describe('Service: Services', function () {
 
         $httpBackend.expectGET(new RegExp(ConfigAPI.endPoint + '/review/event/8/presentation')).respond(expected);
 
-        var actual = PresentationsService.query({eventId: '8', userToken: 'xxx'});
+        var actual = PresentationService.query({eventId: '8', userToken: 'xxx'});
 
         $httpBackend.flush();
 
