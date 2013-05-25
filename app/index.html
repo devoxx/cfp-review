@@ -47,8 +47,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome {{user.firstname}} {{user.lastname}} <b
                                 class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">Change Password</a></li>
-                            <li><a href="#">Logout</a></li>
+                            <!--<li><a href="#">Change Password</a></li>-->
+                            <li><a href="#" ng-click="logout()">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -84,6 +84,7 @@
 
 <script src="components/angular/angular.js"></script>
 <script src="components/angular-resource/angular-resource.js"></script>
+<script src="components/angular-cookies/angular-cookies.js"></script>
 <script src="components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 
 <!-- build:js scripts/scripts.js -->
@@ -96,6 +97,8 @@
 <script src="scripts/controllers/controllers.js"></script>
 <script src="scripts/controllers/presentation.js"></script>
 <script src="scripts/controllers/authentification.js"></script>
+<script src="components/cfp-speaker/app/scripts/services.js"></script>
+<script src="components/cfp-speaker/app/scripts/eventbus.js"></script>
 <!-- endbuild -->
 </body>
 </html>

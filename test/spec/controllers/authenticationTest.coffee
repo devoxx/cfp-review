@@ -6,29 +6,30 @@ describe 'Controller: AuthenticationCtrl', ->
         angular.equals this.actual, expected
     }
 
-  AuthenticationCtrl= {}
-  scope= {}
-  AuthenticationService= {}
+  AuthenticationCtrl = {}
+  scope = {}
+  UserService = {}
   user = {}
-  rootScope = {}
+  waitForCurrentUserThen = {}
 
   beforeEach inject ($controller, $rootScope) ->
     scope = $rootScope.$new()
-    rootScope = $rootScope
-    AuthenticationService = {login: jasmine.createSpy('AuthenticationService.login')}
+    UserService = {login: jasmine.createSpy('UserService.login'), waitForCurrentUser: jasmine.createSpy('UserService.waitForCurrentUser')}
     user = {firstname: 'Vlad'}
-    AuthenticationService.login.andReturn(user)
+    waitForCurrentUserThen =
+      then: ->
+        true
+    UserService.login.andReturn(user)
+    UserService.waitForCurrentUser.andReturn(waitForCurrentUserThen)
 
     AuthenticationCtrl = $controller('AuthenticationCtrl', {
       $scope: scope,
-      AuthenticationService: AuthenticationService,
-      $rootScope: rootScope
+      UserService: UserService
     });
 
-  it 'should attach a user to the scope on login', ->
+  it 'should call UserService.login', ->
     expect(scope.user).toBeUndefined()
     scope.emailOrUsername = 'vlad'
     scope.password = 'imir'
     scope.login()
-    expect(AuthenticationService.login).toHaveBeenCalledWith('vlad', 'imir')
-    expect(rootScope.user).toEqualData(user)
+    expect(UserService.login).toHaveBeenCalledWith('vlad', 'imir')

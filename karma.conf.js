@@ -5,18 +5,20 @@ basePath = '';
 
 // list of files / patterns to load in the browser
 files = [
-  JASMINE,
-  JASMINE_ADAPTER,
-  'app/components/angular/angular.js',
-  'app/components/angular-mocks/angular-mocks.js',
-  'app/components/angular-resource/angular-resource.js',
-  'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
-  'app/scripts/*.js',
-  'app/scripts/**/*.js',
-  '.tmp/scripts/**/*.js',
-  'test/mock/**/*.js',
-  'test/spec/**/*.js',
-  '.tmp/spec/**/*.js'
+    JASMINE, JASMINE_ADAPTER,
+    'app/components/angular/angular.js',
+    'app/components/angular-mocks/angular-mocks.js',
+    'app/components/angular-resource/angular-resource.js',
+    'app/components/angular-cookies/angular-cookies.js',
+    'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
+    'app/components/cfp-speaker/app/scripts/services.js',
+    'app/components/cfp-speaker/app/scripts/eventbus.js',
+    'app/scripts/*.js',
+    'app/scripts/**/*.js',
+    '.tmp/scripts/**/*.js',
+    'test/mock/**/*.js',
+    'test/spec/**/*.js',
+    '.tmp/spec/**/*.js'
 ];
 
 // list of files to exclude
@@ -27,13 +29,13 @@ exclude = [];
 reporters = ['progress', 'coverage', 'junit'];
 
 preprocessors = {
-  '.tmp/scripts/**/*.js': 'coverage',
-  '!(dist)/scripts/**/*.js': 'coverage'
+    '.tmp/scripts/**/*.js': 'coverage',
+    '!(dist)/scripts/**/*.js': 'coverage'
 };
 
 coverageReporter = {
-  type : 'html',
-  dir : 'coverage/'
+    type: 'html',
+    dir: 'coverage/'
 }
 
 // web server port
@@ -70,6 +72,6 @@ captureTimeout = 50000;
 singleRun = false;
 
 junitReporter = {
-  outputFile: 'test_out/unit.xml',
-  suite: 'unit'
+    outputFile: 'test_out/unit.xml',
+    suite: 'unit'
 };

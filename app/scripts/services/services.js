@@ -1,26 +1,15 @@
 'use strict';
 
-angular.module('Services', ['ngResource', 'Config'])
-  .factory('PresentationsService', ['$resource', 'ConfigAPI', function ($resource, ConfigAPI) {
-    return $resource(ConfigAPI.endPoint + '/review/event/:eventId/presentations/:presentationId',
-      {index: 0, size: 10, userToken: '8a3e49943ea18167013ea52cb1503d1a'},
-      { 'query': {method: 'GET'}});
-  }])
-  .factory('PresentationService', ['$resource', 'ConfigAPI', function ($resource, ConfigAPI) {
-    return $resource(ConfigAPI.endPoint + '/review/event/:eventId/presentation/:presentationId',
-      {index: 0, size: 10, userToken: '8a3e49943ea18167013ea52cb1503d1a'},
-      { 'get': {method: 'GET'}});
-  }])
-  .factory('EventsService', ['$resource', 'ConfigAPI', function ($resource, ConfigAPI) {
-    return $resource(ConfigAPI.endPoint + '/proposal/event/:eventId', {eventId: '@id'});
-  }])
-  .factory('AuthenticationService', ['$http', 'ConfigAPI', function ($http, ConfigAPI) {
-    var authSvc = {};
-    authSvc.login = function (emailOrUsername, password) {
-      return $http.post(ConfigAPI.endPoint + '/auth/login?login=' + emailOrUsername + '&password=' + password, {}).then(
-        function (response) {
-          return response.data;
-        });
-    };
-    return authSvc;
-  }]);
+angular.module('Services', ['GenericServices', 'ngResource', 'Config'])
+    .factory('PresentationsService', ['$resource', 'ConfigAPI', 'UserService', '$log', function ($resource, ConfigAPI, UserService) {
+        return $resource(ConfigAPI.endPoint + '/review/event/:eventId/presentation/:presentationId', {index: 0, size: 10, userToken: UserService.getToken()}, { 'query': {method: 'GET'}});
+    }])
+    .factory('PresentationService', ['$resource', 'ConfigAPI', 'UserService', function ($resource, ConfigAPI, UserService) {
+        return $resource(ConfigAPI.endPoint + '/review/event/:eventId/presentation/:presentationId', {index: 0, size: 10, userToken: UserService.getToken()}, { 'get': {method: 'GET'}});
+    }])
+    .factory('EventsService', ['$resource', 'ConfigAPI', function ($resource, ConfigAPI) {
+        return $resource(ConfigAPI.endPoint + '/proposal/event/:eventId');
+    }])
+    .factory('RatingService', ['$resource', 'ConfigAPI', 'UserService', function ($resource, ConfigAPI, UserService) {
+        return $resource(ConfigAPI.endPoint + '/review/event/:eventId/presentation/:presentationId/rating', {userToken: UserService.getToken()});
+    }]);

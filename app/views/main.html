@@ -21,7 +21,7 @@
             <td><input value=" " type="submit" ng-class="{'invited': p.invited, 'uninvited': !p.invited}"></td>
             <td><input value=" " type="submit" ng-class="{'scheduled': p.scheduled, 'unscheduled': !p.scheduled}"></td>
             <td><a href="#">{{p.author.firstname}} {{p.author.lastname}}</a></td>
-            <td><a href="#/{{p.id}}">{{p.title}}</a></td>
+            <td><a href="#/presentation/{{p.id}}">{{p.title}}</a></td>
             <td>{{typeDisplay(p.type)}}</td>
             <td><span class="label" ng-class="stateClass(p.state)">{{stateDisplay(p.state)}}</span></td>
             <td><span class="label" ng-class="ratingClass(p.rating)">{{p.rating | number:1}}</span></td>
@@ -35,7 +35,9 @@
         <fieldset>
             <legend>Search & Filter</legend>
             <label>Event</label>
-            <select ng-options="e.name for e in events">
+            <select>
+                <option ng-repeat="e in events">{{e.name}}</option>
+            </select>
             <label>Type</label>
             <select>
                 <option>Conference</option>

@@ -8,6 +8,7 @@ describe 'Controller: MainCtrl', ->
 
   MainCtrl= {}
   scope= {}
+  rootScope= {}
   PresentationsService= {}
   EventsService= {}
   presentation = {}
@@ -15,8 +16,11 @@ describe 'Controller: MainCtrl', ->
   presentations = []
   events = []
 
-  beforeEach inject ($controller, $rootScope, $httpBackend, ConfigAPI) ->
+  beforeEach inject ($controller, $rootScope) ->
+    rootScope = $rootScope;
     scope = $rootScope.$new()
+    scope.defaultEvent =
+      id: 8
     PresentationsService = {query: jasmine.createSpy('PresentationsService.query')}
     presentation = {ratings: [{percentage: 2},{percentage: 4}]}
     presentations = {results: [presentation]}
@@ -27,14 +31,10 @@ describe 'Controller: MainCtrl', ->
     events = [event]
     EventsService.query.andReturn(events)
 
-    $httpBackend.expectGET(new RegExp(ConfigAPI.endPoint + "/proposal/event")).respond(events)
-
     MainCtrl = $controller('MainCtrl', {
       $scope: scope,
       PresentationsService: PresentationsService
     });
-
-    $httpBackend.flush()
 
   it 'should calculate average rating on a presentation', ->
     actual = scope.averageRating presentation
@@ -60,8 +60,9 @@ describe 'Controller: MainCtrl', ->
     expect(presentation.rating).toEqual 3
 
   it 'should attach a list of talks to the scope', ->
+    rootScope.$broadcast('APP_LOADED')
     expect(scope.presentations).toBeDefined()
-    expect(PresentationsService.query).toHaveBeenCalledWith(scope.enrichPresentations)
+    expect(PresentationsService.query).toHaveBeenCalledWith({eventId: 8}, scope.enrichPresentations)
     expect(scope.presentations.results.length).toEqual(1)
     expect(scope.presentations.results).toEqualData([presentation])
 
