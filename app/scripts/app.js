@@ -28,7 +28,7 @@ angular.module('cfpReviewApp', ['GenericServices', 'Services', 'ui.bootstrap', '
         }).otherwise({
             redirectTo: '/'
         });
-    }).run([ 'UserService', 'EventService', '$rootScope', '$cookies', 'EventBus', function (UserService, EventService, $rootScope, $cookies, EventBus) {
+    }).run([ 'UserService', 'EventService', '$rootScope', '$cookies', function (UserService, EventService, $rootScope, $cookies) {
         var userToken = $cookies.userToken;
         if (userToken && userToken.length > 0) {
             UserService.loginByToken(userToken);
