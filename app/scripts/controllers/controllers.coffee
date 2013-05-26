@@ -1,5 +1,6 @@
 angular.module('cfpReviewApp').controller 'MainCtrl',
-  ['$scope', 'PresentationService', ($scope, PresentationService) ->
+  ['$scope', 'PresentationService', '$rootScope', 'UserService', ($scope, PresentationService, $rootScope, UserService) ->
+
     # calculate average rating of a presentation
     $scope.averageRating = (prez) ->
       return '?' if not prez.ratings? or prez.ratings.length == 0
@@ -16,8 +17,7 @@ angular.module('cfpReviewApp').controller 'MainCtrl',
     $scope.enrichPresentations = (presentations) ->
       $scope.updateRating prez for prez in presentations.results
 
-    $scope.$on('APP_LOADED', ->
-      $scope.presentations = PresentationService.query({eventId: $scope.defaultEvent.id}, $scope.enrichPresentations))
+    $scope.presentations = PresentationService.query({eventId: $scope.defaultEvent.id, userToken: UserService.getToken()}, $scope.enrichPresentations)
 
     $scope.stateClass = (state) ->
       switch state.toUpperCase()
@@ -44,4 +44,4 @@ angular.module('cfpReviewApp').controller 'MainCtrl',
 
     $scope.typeDisplay = (type) -> type.name?.toUpperCase().substr(0, 1)
 
-  ];
+  ]

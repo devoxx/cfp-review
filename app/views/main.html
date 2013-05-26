@@ -1,6 +1,7 @@
 <div class="span9">
     <h3>Devoxx Call For Papers - Review</h3>
-    <table class="table table-striped">
+    <h4 ng-hide="presentations">Nothing to display</h4>
+    <table ng-show="presentations" class="table table-striped">
         <caption>Presentation Search Results ({{presentations.count}})</caption>
         <thead>
         <tr>
@@ -30,7 +31,7 @@
         </tbody>
     </table>
 </div>
-<div class="span2">
+<div class="span2" ng-show="presentations">
     <form>
         <fieldset>
             <legend>Search & Filter</legend>
