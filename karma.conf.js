@@ -6,11 +6,12 @@ basePath = '';
 // list of files / patterns to load in the browser
 files = [
     JASMINE, JASMINE_ADAPTER,
-    'app/components/angular/angular.js',
-    'app/components/angular-mocks/angular-mocks.js',
-    'app/components/angular-resource/angular-resource.js',
-    'app/components/angular-cookies/angular-cookies.js',
+    'app/components/unstable-angular-complete/angular.js',
+    'app/components/unstable-angular-complete/angular-mocks.js',
+    'app/components/unstable-angular-complete/angular-resource.js',
+    'app/components/unstable-angular-complete/angular-cookies.js',
     'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
+    'app/components/mousetrap/mousetrap.js',
     'app/components/cfp-speaker/app/scripts/services.js',
     'app/components/cfp-speaker/app/scripts/eventbus.js',
     'app/scripts/*.js',

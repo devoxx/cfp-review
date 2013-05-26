@@ -28,6 +28,7 @@
 <hr>
 
 <section>
+
     <h4>Presentation</h4>
 
     <form class="form-horizontal">
@@ -291,7 +292,7 @@
 </article>
 </div>
 
-<div class="span2" style="text-align: center">
+<div class="span2 rating">
 
     <div class="affix">
 
@@ -300,13 +301,17 @@
         <h3>Rate it !</h3>
 
         <div class="btn-group btn-group-vertical">
-            <button type="button" class="btn btn-large btn-success" ng-model="rate" btn-radio="'5'" ng-click="rateIt(5)"><h1 ng-class="{'rated': rate == '5'}">5</h1></button>
-            <button type="button" class="btn btn-large btn-success" ng-model="rate" btn-radio="'4'" ng-click="rateIt(4)"><h1 ng-class="{'rated': rate == '4'}">4</h1></button>
-            <button type="button" class="btn btn-large btn-warning" ng-model="rate" btn-radio="'3'" ng-click="rateIt(3)"><h1 ng-class="{'rated': rate == '3'}">3</h1></button>
-            <button type="button" class="btn btn-large btn-warning" ng-model="rate" btn-radio="'2'" ng-click="rateIt(2)"><h1 ng-class="{'rated': rate == '2'}">2</h1></button>
-            <button type="button" class="btn btn-large btn-danger" ng-model="rate" btn-radio="'1'" ng-click="rateIt(1)"><h1 ng-class="{'rated': rate == '1'}">1</h1></button>
-            <button type="button" class="btn btn-large btn-danger" ng-model="rate" btn-radio="'0'" ng-click="rateIt(0)"><h1 ng-class="{'rated': rate == '0'}">0</h1></button>
+            <button type="button" class="btn btn-success" ng-model="rate" btn-radio="'5'" ng-click="rateIt(5)"><h2 ng-class="{'rated': rate == '5'}">5</h2></button>
+            <button type="button" class="btn btn-success" ng-model="rate" btn-radio="'4'" ng-click="rateIt(4)"><h2 ng-class="{'rated': rate == '4'}">4</h2></button>
+            <button type="button" class="btn btn-warning" ng-model="rate" btn-radio="'3'" ng-click="rateIt(3)"><h2 ng-class="{'rated': rate == '3'}">3</h2></button>
+            <button type="button" class="btn btn-warning" ng-model="rate" btn-radio="'2'" ng-click="rateIt(2)"><h2 ng-class="{'rated': rate == '2'}">2</h2></button>
+            <button type="button" class="btn btn-danger" ng-model="rate" btn-radio="'1'" ng-click="rateIt(1)"><h2 ng-class="{'rated': rate == '1'}">1</h2></button>
+            <button type="button" class="btn btn-danger" ng-model="rate" btn-radio="'0'" ng-click="rateIt(0)"><h2 ng-class="{'rated': rate == '0'}">0</h2></button>
         </div>
+
+        <h3>Shortcuts Keys</h3>
+        <label>0..5 = rate 0 to 5</label>
+        <!--<label>p = previous / n = next</label>-->
 
     </div>
 

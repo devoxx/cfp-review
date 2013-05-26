@@ -9,7 +9,10 @@ angular.module('Services', ['GenericServices', 'ngResource', 'Config']).factory(
         return $resource(ConfigAPI.endPoint + '/proposal/event/:eventId');
     }]).factory('RatingService', ['$resource', 'ConfigAPI', 'UserService', function ($resource, ConfigAPI, UserService) {
         return $resource(ConfigAPI.endPoint + '/review/event/:eventId/presentation/:presentationId/rating', {userToken: UserService.getToken()});
-    }]).factory('ResolverService', ['EventService', 'UserService', '$q', '$rootScope', function (EventService, UserService, $q, $rootScope) {
+    }]).factory('MousetrapService', function () {
+        /* jshint -W117 */
+        return Mousetrap;
+    }).factory('ResolverService', ['EventService', 'UserService', '$q', '$rootScope', function (EventService, UserService, $q, $rootScope) {
         var defer = $q.defer();
         UserService.waitForCurrentUser().then(function () {
             EventService.getEvents().then(function (events) {
