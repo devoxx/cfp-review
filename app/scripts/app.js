@@ -4,17 +4,7 @@ angular.module('cfpReviewApp', ['GenericServices', 'Services', 'ui.bootstrap', '
     .config(function ($routeProvider) {
 
         var resolver = {
-            userAndEvents: function(EventService, UserService, $q, $rootScope) {
-                var defer = $q.defer();
-                UserService.waitForCurrentUser().then(function(){
-                    EventService.getEvents().then(function(events){
-                        $rootScope.events = events;
-                        $rootScope.defaultEvent = events[0];
-                        defer.resolve();
-                    });
-                });
-                return defer.promise;
-            }
+            userAndEvents: 'ResolverService'
         };
 
         $routeProvider.when('/', {
