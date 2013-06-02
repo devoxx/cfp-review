@@ -1,0 +1,14 @@
+{
+  "name": "cfp-review",
+  "version": "0.0.0",
+  "dependencies": {
+    "unstable-angular-complete": "~1.1.5",
+    "json3": "~3.2.4",
+    "es5-shim": "~2.0.8",
+    "angular-bootstrap": "~0.3.0",
+    "cfp-speaker": "devoxx/cfp-speaker",
+    "mousetrap": "~1.4.1",
+    "ngInfiniteScroll": "1.0.0",
+    "jquery": "~1.9.1"
+  }
+}

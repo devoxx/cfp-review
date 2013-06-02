@@ -1,8 +1,8 @@
 <div class="span9">
     <h3>Devoxx Call For Papers - Review</h3>
-    <h4 ng-hide="presentations">Nothing to display</h4>
-    <table ng-show="presentations" class="table table-striped">
-        <caption>Presentation Search Results ({{presentations.count}})</caption>
+    <h4 ng-hide="{{model.presentations.length == 0}}">Nothing to display</h4>
+    <table class="table table-striped" infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1'>
+        <caption>Presentation Search Results (1-{{model.presentations.length}}/{{model.count}})</caption>
         <thead>
         <tr>
             <th><img src="/images/fav_on_16.png" alt="favorite"/></th>
@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="p in presentations.results" ng-class="{'success': stateDisplay(p.state)=='ACC'}" id="presentation-{{p.id}}">
+        <tr ng-repeat="p in model.presentations" ng-class="{'success': stateDisplay(p.state)=='ACC'}" id="presentation-{{p.id}}">
             <td><input value=" " type="submit" ng-class="{'favorite': p.favorite, 'unfavorite': !p.favorite}"></td>
             <td><input value=" " type="submit" ng-class="{'invited': p.invited, 'uninvited': !p.invited}"></td>
             <td><input value=" " type="submit" ng-class="{'scheduled': p.scheduled, 'unscheduled': !p.scheduled}"></td>
@@ -30,15 +30,15 @@
         </tr>
         </tbody>
     </table>
+    <caption>Presentation Search Results (1-{{model.presentations.length}}/{{model.count}})</caption>
+    <div ng-show='busy'>Loading data...</div>
 </div>
-<div class="span2" ng-show="presentations">
+<div class="span2">
     <form>
         <fieldset>
             <legend>Search & Filter</legend>
             <label>Event</label>
-            <select>
-                <option ng-repeat="e in events">{{e.name}}</option>
-            </select>
+            <select ng-model="eventId" ng-options="e.id as e.name for e in events"></select>
             <label>Type</label>
             <select>
                 <option>Conference</option>

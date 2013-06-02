@@ -12,6 +12,7 @@ files = [
     'app/components/unstable-angular-complete/angular-cookies.js',
     'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
     'app/components/mousetrap/mousetrap.js',
+    'app/components/ngInfiniteScroll/ng-infinite-scroll.js',
     'app/components/cfp-speaker/app/scripts/services.js',
     'app/components/cfp-speaker/app/scripts/eventbus.js',
     'app/scripts/*.js',

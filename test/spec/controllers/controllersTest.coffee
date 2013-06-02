@@ -61,10 +61,7 @@ describe 'Controller: MainCtrl', ->
 
   it 'should attach a list of talks to the scope', ->
     rootScope.$broadcast('APP_LOADED')
-    expect(scope.presentations).toBeDefined()
-    expect(PresentationService.query).toHaveBeenCalledWith({eventId: 8}, scope.enrichPresentations)
-    expect(scope.presentations.results.length).toEqual(1)
-    expect(scope.presentations.results).toEqualData([presentation])
+    expect(PresentationService.query).toHaveBeenCalledWith({eventId: 8, index: 0}, scope.addPresentations)
 
   it 'should return state class to use depending of state value', ->
     expect(scope.stateClass('Deleted')).toEqual('label-inverse')

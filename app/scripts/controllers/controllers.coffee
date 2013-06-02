@@ -1,5 +1,26 @@
 angular.module('cfpReviewApp').controller 'MainCtrl',
-  ['$scope', 'PresentationService', '$rootScope', 'UserService', ($scope, PresentationService, $rootScope, UserService) ->
+  ['$scope', 'PresentationService', '$rootScope', 'UserService', '$routeParams', '$log', '$http', ($scope, PresentationService, $rootScope, UserService, $routeParams, $log, $http) ->
+
+    $scope.eventId = $routeParams.eventId ? $scope.defaultEvent.id
+
+    $scope.model =
+      presentations: []
+    $scope.busy = false
+    $scope.index = 0
+
+    $scope.addPresentations = (prezos) ->
+      $scope.model.count = prezos.count
+      $scope.enrichPresentations(prezos)
+      for i in [0..prezos.results.length-1]
+        $scope.model.presentations.push(prezos.results[i])
+        $scope.busy = false
+
+    $scope.nextPage = ->
+      return if $scope.busy
+      $scope.busy = true
+      PresentationService.query({eventId: $scope.eventId, index: $scope.index++}, $scope.addPresentations)
+
+    $scope.nextPage()
 
     # calculate average rating of a presentation
     $scope.averageRating = (prez) ->
@@ -16,8 +37,6 @@ angular.module('cfpReviewApp').controller 'MainCtrl',
     # for each presensation in list calculate average rating
     $scope.enrichPresentations = (presentations) ->
       $scope.updateRating prez for prez in presentations.results
-
-    $scope.presentations = PresentationService.query({eventId: $scope.defaultEvent.id, userToken: UserService.getToken()}, $scope.enrichPresentations)
 
     $scope.stateClass = (state) ->
       switch state.toUpperCase()
