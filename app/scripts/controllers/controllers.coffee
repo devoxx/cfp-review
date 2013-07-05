@@ -1,5 +1,5 @@
 angular.module('cfpReviewApp').controller 'MainCtrl',
-  ['$scope', 'PresentationService', '$rootScope', 'UserService', '$routeParams', '$log', '$http', ($scope, PresentationService, $rootScope, UserService, $routeParams, $log, $http) ->
+  ['$scope', 'PresentationService', 'Presentation', '$rootScope', 'UserService', '$routeParams', '$log', '$http', ($scope, PresentationService, Presentation, $rootScope, UserService, $routeParams, $log, $http) ->
 
     $scope.eventId = $routeParams.eventId ? $scope.defaultEvent.id
 
@@ -22,17 +22,9 @@ angular.module('cfpReviewApp').controller 'MainCtrl',
 
     $scope.nextPage()
 
-    # calculate average rating of a presentation
-    $scope.averageRating = (prez) ->
-      return '?' if not prez.ratings? or prez.ratings.length == 0
-      sum = prez.ratings.reduce (x, y) ->
-        sum =
-          percentage: x.percentage + y.percentage
-      sum.percentage / prez.ratings.length
-
     # set presentation.rating property with calculated average rating
     $scope.updateRating = (prez) ->
-      prez.rating = $scope.averageRating prez
+      prez.rating = Presentation.averageRating(prez)
 
     # for each presensation in list calculate average rating
     $scope.enrichPresentations = (presentations) ->

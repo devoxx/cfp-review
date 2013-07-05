@@ -36,12 +36,12 @@ describe 'Controller: MainCtrl', ->
       PresentationService: PresentationService
     });
 
-  it 'should calculate average rating on a presentation', ->
+  xit 'should calculate average rating on a presentation', ->
     actual = scope.averageRating presentation
     expect(actual).toBeDefined()
     expect(actual).toEqual 3
 
-  it 'should calculate average rating with result "?" if presentation ratings are undefined', ->
+  xit 'should calculate average rating with result "?" if presentation ratings are undefined', ->
     actual = scope.averageRating {}
     expect(actual).toBeDefined()
     expect(actual).toEqual '?'

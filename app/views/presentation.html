@@ -154,21 +154,21 @@
     <h4>Status</h4>
 
     <form class="form-horizontal">
-        <div class="control-group">
-            <label class="control-label">Rating</label>
+        <!--<div class="control-group">-->
+            <!--<label class="control-label">Rating</label>-->
 
-            <div class="controls">
-                <span class="label label-success">4.2</span>
-                Rate
-                <span class="label label-important">0</span>
-                <span class="label label-important">1</span>
-                <span class="label label-warning">2</span>
-                <span class="label label-warning">3</span>
-                <span class="label label-success">4</span>
-                <span class="label label-success">5</span>
-                (1 is bad, 5 is excellent, 0 for no vote)
-            </div>
-        </div>
+            <!--<div class="controls">-->
+                <!--<span class="label label-success">4.2</span>-->
+                <!--Rate-->
+                <!--<span class="label label-important">0</span>-->
+                <!--<span class="label label-important">1</span>-->
+                <!--<span class="label label-warning">2</span>-->
+                <!--<span class="label label-warning">3</span>-->
+                <!--<span class="label label-success">4</span>-->
+                <!--<span class="label label-success">5</span>-->
+                <!--(1 is bad, 5 is excellent, 0 for no vote)-->
+            <!--</div>-->
+        <!--</div>-->
         <div class="control-group">
             <label class="control-label">Schedulable</label>
 
@@ -267,6 +267,25 @@
 
 <section>
     <h4>Speaker Questions and Feedback</h4>
+
+    <table class="table table-striped" ng-show="presentation.feedbacks">
+        <tbody>
+        <tr ng-repeat="f in presentation.feedbacks">
+            <td>{{f | json}}</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label"></label>
+
+            <div class="controls">
+                <textarea rows=3></textarea>
+                <button type="button" class="btn">Add feedback</button>
+            </div>
+        </div>
+    </form>
 </section>
 
 <hr>
@@ -274,16 +293,21 @@
 <section>
     <h4>Comments</h4>
 
-    <div ng-repeat="comment in presentation.comments">
-
-    </div>
+    <table class="table table-striped" ng-show="presentation.comments">
+            <tbody>
+        <tr ng-repeat="comment in presentation.comments">
+            <td>{{comment.text}}</a></td>
+        </tr>
+        </tbody>
+    </table>
 
     <form class="form-horizontal">
         <div class="control-group">
-            <label class="control-label">Add comment</label>
+            <label class="control-label">What do you think ?</label>
 
             <div class="controls">
                 <textarea rows=3></textarea>
+                <button type="button" class="btn">Add your comment</button>
             </div>
         </div>
     </form>
@@ -296,7 +320,7 @@
 
     <div class="affix">
 
-        <h3> Rating: <label class="badge badge-success"><h1>{{avgRate && avgRate || '?'}}</h1></label></h3>
+        <h3> Rating: <label class="badge badge-success"><h1>{{avgRate && avgRate | number:1 || '?'}}</h1></label></h3>
 
         <h3>Rate it !</h3>
 

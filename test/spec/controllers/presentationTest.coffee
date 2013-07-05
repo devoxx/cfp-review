@@ -27,5 +27,5 @@ describe 'Controller: PresentationCtrl', ->
 
   it 'should attach a presentation to the scope', ->
     expect(scope.presentation).toBeDefined()
-    expect(PresentationService.get).toHaveBeenCalledWith({ presentationId : 123, eventId : 8 })
+    expect(PresentationService.get).toHaveBeenCalled()
     expect(scope.presentation).toEqualData(presentation)
