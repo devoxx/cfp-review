@@ -4,5 +4,6 @@ test_out
 coverage
 node_modules
 .tmp
+.idea
 *.iml
 .DS_Store
