@@ -13,7 +13,7 @@ files = [
     'app/components/angular-bootstrap/ui-bootstrap-tpls.js',
     'app/components/mousetrap/mousetrap.js',
     'app/components/ngInfiniteScroll/ng-infinite-scroll.js',
-    'app/components/cfp-speaker/app/config.js',
+    'app/config.js',
     'app/components/cfp-speaker/app/scripts/services/services.js',
     'app/components/cfp-speaker/app/scripts/services/eventbus.js',
     'app/components/cfp-speaker/app/scripts/services/UsersService.js',
