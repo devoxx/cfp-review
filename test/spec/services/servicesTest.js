@@ -35,7 +35,7 @@ describe('Service: Services', function () {
 
     xit('should get a presentation list for event 8', inject(function ($httpBackend) {
 
-        $httpBackend.expectGET(new RegExp(ConfigAPI.endPoint + '/review/event/8/presentation')).respond(expected);
+        $httpBackend.expectGET(new RegExp(baseUri + 'review/event/8/presentation')).respond(expected);
 
         var actual = PresentationService.query({eventId: '8', userToken: 'xxx'});
 
@@ -47,7 +47,7 @@ describe('Service: Services', function () {
 
     xit('should get a presentation for event 8', inject(function ($httpBackend) {
 
-        $httpBackend.expectGET(new RegExp(ConfigAPI.endPoint + '/review/event/8/presentation/123')).respond(expected);
+        $httpBackend.expectGET(new RegExp(baseUri + 'review/event/8/presentation/123')).respond(expected);
 
         var actual = PresentationService.get({ presentationId: 123, eventId: 8 });
 
@@ -59,7 +59,7 @@ describe('Service: Services', function () {
 
     it('should get an event list', inject(function ($httpBackend) {
 
-        $httpBackend.expectGET(new RegExp(ConfigAPI.endPoint + '/proposal/event')).respond(expectedEvent);
+        $httpBackend.expectGET(new RegExp(baseUri + 'proposal/event')).respond(expectedEvent);
 
         var actual = EventsService.query();
 
@@ -72,7 +72,7 @@ describe('Service: Services', function () {
 
     it('should get an user on login', inject(function ($httpBackend) {
 
-        $httpBackend.expectPOST(new RegExp(ConfigAPI.endPoint + '/auth')).respond(expectedUser);
+        $httpBackend.expectPOST(new RegExp(baseUri + 'auth')).respond(expectedUser);
 
         var actual = UserService.login('vlad', 'imir').then(function (user) {
             actual = user;
