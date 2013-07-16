@@ -296,7 +296,30 @@
     <table class="table table-striped" ng-show="presentation.comments">
             <tbody>
         <tr ng-repeat="comment in presentation.comments">
-            <td>{{comment.text}}</a></td>
+            <td>
+                <div class="row-fluid">
+                    <div class="row-fluid">
+                        <div class="span2">
+                            <div class="speakerIcon" style="background: url({{thumbnailUrl(comment.user)}});" ></div>
+                        </div>
+                        <div class="span10">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <span>{{comment.user.firstname}} {{comment.user.lastname}}</span><br>
+                                    <span>{{comment.createdOn|date:'medium'}}</span>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <br>
+                                    <span>{{comment.text}}<span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>
