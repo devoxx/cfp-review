@@ -1,6 +1,6 @@
 angular.module('cfpReviewApp').controller 'PresentationCtrl',
-  ['$scope', 'PresentationService', 'Presentation', 'RatingService', '$routeParams', '$log', 'MousetrapService'
-    ($scope, PresentationService, Presentation, RatingService, $routeParams, $log, MousetrapService) ->
+  ['$scope', 'PresentationService', 'Presentation', 'RatingService', '$routeParams', '$log', 'MousetrapService','UserService'
+    ($scope, PresentationService, Presentation, RatingService, $routeParams, $log, MousetrapService, UserService) ->
       $scope.presentation = PresentationService.get({presentationId: $routeParams.presentationId, eventId: $scope.defaultEvent.id}, (prez) ->
         $scope.avgRate = Presentation.averageRating(prez))
 
@@ -17,6 +17,9 @@ angular.module('cfpReviewApp').controller 'PresentationCtrl',
       $scope.$on('$routeChangeStart', ->
         removeShortcutToRateFor rate for rate in [0..5]
       )
+
+      $scope.thumbnailUrl = (speaker) ->
+          return UserService.thumbnailUrl(speaker)
 
       addShortcutToRateFor rate for rate in [0..5]
 
