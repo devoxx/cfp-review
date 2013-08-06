@@ -9,7 +9,7 @@ describe 'Controller: MainCtrl', ->
   MainCtrl= {}
   scope= {}
   rootScope= {}
-  PresentationService= {}
+  PresentationQueryService= {}
   EventsService= {}
   presentation = {}
   event = {}
@@ -21,10 +21,10 @@ describe 'Controller: MainCtrl', ->
     scope = $rootScope.$new()
     scope.defaultEvent =
       id: 8
-    PresentationService = {query: jasmine.createSpy('PresentationService.query')}
+    PresentationQueryService = {query: jasmine.createSpy('PresentationQueryService.query')}
     presentation = {ratings: [{percentage: 2},{percentage: 4}]}
     presentations = {results: [presentation]}
-    PresentationService.query.andReturn(presentations)
+    PresentationQueryService.query.andReturn(presentations)
 
     EventsService = {query: jasmine.createSpy('EventsService.query')}
     event = {name: "Sample"}
@@ -33,7 +33,7 @@ describe 'Controller: MainCtrl', ->
 
     MainCtrl = $controller('MainCtrl', {
       $scope: scope,
-      PresentationService: PresentationService
+      PresentationQueryService: PresentationQueryService
     });
 
   xit 'should calculate average rating on a presentation', ->
@@ -61,7 +61,7 @@ describe 'Controller: MainCtrl', ->
 
   it 'should attach a list of talks to the scope', ->
     rootScope.$broadcast('APP_LOADED')
-    expect(PresentationService.query).toHaveBeenCalledWith({eventId: 8, index: 0}, scope.addPresentations)
+    expect(PresentationQueryService.query).toHaveBeenCalledWith({index: 1}, jasmine.any(Object), scope.addPresentations)
 
   it 'should return state class to use depending of state value', ->
     expect(scope.stateClass('Deleted')).toEqual('label-inverse')
