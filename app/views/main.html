@@ -17,7 +17,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="p in model.presentations" ng-class="{'success': stateDisplay(p.state)=='ACC'}" id="presentation-{{p.id}}">
+        <tr ng-repeat="p in model.presentations track by $index" ng-class="{'success': stateDisplay(p.state)=='ACC'}" id="presentation-{{p.id}}">
             <td><input value=" " type="submit" ng-class="{'favorite': p.favorite, 'unfavorite': !p.favorite}"></td>
             <td><input value=" " type="submit" ng-class="{'invited': p.invited, 'uninvited': !p.invited}"></td>
             <td><input value=" " type="submit" ng-class="{'scheduled': p.scheduled, 'unscheduled': !p.scheduled}"></td>
@@ -37,26 +37,13 @@
     <form>
         <fieldset>
             <legend>Search & Filter</legend>
+            <label>{{ query | json }}</label>
             <label>Event</label>
-            <select ng-model="eventId" ng-options="e.id as e.name for e in events"></select>
+            <select ng-model="query.eventId" ng-options="e.id as e.name for e in events"></select>
             <label>Type</label>
-            <select>
-                <option>Conference</option>
-                <option>University</option>
-                <option>Tools in Action</option>
-                <option>Hands-on Labs</option>
-                <option>BOF</option>
-                <option>Quickie</option>
-            </select>
+            <select ng-model="query.type"  ng-options="t.id as t.name for t in types"></select>
             <label>Track</label>
-            <select>
-                <option>Web</option>
-                <option>NoSQL</option>
-                <option>Cloud</option>
-                <option>Java</option>
-                <option>Startup</option>
-                <option>Languages alternatifs</option>
-            </select>
+            <select ng-model="query.track"  ng-options="t.id as t.name for t in tracks"></select>
             <label>State</label>
             <label class="checkbox">
                 <input type="checkbox"> DELETED
@@ -94,10 +81,10 @@
             <label class="checkbox">
                 <input type="checkbox"> With new comments
             </label>
-            <input type="text" placeholder="Tags (space separated)">
+            <input type="text" ng-model="tags" placeholder="Tags (space separated)">
             <label>Search keywords</label>
-            <input type="text">
-            <button type="submit" class="btn btn-primary">Search</button>
+            <input type="text" ng-model="query.query">
+            <button type="submit" class="btn btn-primary" ng-click="refresh">Search</button>
         </fieldset>
     </form>
 </div>

@@ -1,12 +1,39 @@
 angular.module('cfpReviewApp').controller 'MainCtrl',
-  ['$scope', 'PresentationService', 'Presentation', '$rootScope', 'UserService', '$routeParams', '$log', '$http', ($scope, PresentationService, Presentation, $rootScope, UserService, $routeParams, $log, $http) ->
+  ['$scope', 'PresentationQueryService', 'Presentation', '$rootScope', 'UserService', '$routeParams', '$log', '$http', ($scope, PresentationQueryService, Presentation, $rootScope, UserService, $routeParams, $log, $http) ->
 
-    $scope.eventId = $routeParams.eventId ? $scope.defaultEvent.id
+    $scope.query =
+      eventId: $routeParams.eventId ? $scope.defaultEvent.id
+      type: null
+      track: null
+      states: null
+      alreadyRated: null
+      favouritesOnly: null
+      invitesOnly: null
+      alreadyScheduled: null
+      myCommentWasLast: null
+      tags: null
+      query: null
 
     $scope.model =
       presentations: []
     $scope.busy = false
     $scope.index = 0
+
+    $scope.types = [
+      {id:null, name:'' },
+      {id:1, name:'Conference' },
+      {id:2, name:'University' },
+      {id:3, name:'Tools in Action' },
+      {id:4, name:'Hands-on Labs' },
+      {id:5, name:'BOF' },
+      {id:6, name:'Quickie' }
+    ]
+
+    $scope.tracks = [
+      {id:null, name:'' },
+      {id:1, name:'Web' },
+      {id:2, name:'NoSQL' }
+    ]
 
     $scope.addPresentations = (prezos) ->
       $scope.model.count = prezos.count
@@ -15,12 +42,27 @@ angular.module('cfpReviewApp').controller 'MainCtrl',
         $scope.model.presentations.push(prezos.results[i])
         $scope.busy = false
 
-    $scope.nextPage = ->
+    $scope.refresh = ->
       return if $scope.busy
       $scope.busy = true
-      PresentationService.query({eventId: $scope.eventId, index: $scope.index++}, $scope.addPresentations)
+      PresentationQueryService.query({index: $scope.index}, $scope.query, $scope.addPresentations)
+
+    $scope.nextPage = ->
+      $scope.index++
+      $scope.refresh()
 
     $scope.nextPage()
+
+    $scope.$watch('query', $scope.refresh, true)
+
+    $scope.trim = (e)->
+      e.trim()
+
+    $scope.refreshTags = ->
+      return if !$scope.tags
+      $scope.query.tags = $scope.tags.split(',').map($scope.trim)
+
+    $scope.$watch('tags', $scope.refreshTags)
 
     # set presentation.rating property with calculated average rating
     $scope.updateRating = (prez) ->
