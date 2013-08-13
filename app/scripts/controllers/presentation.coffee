@@ -4,6 +4,8 @@ angular.module('cfpReviewApp').controller 'PresentationCtrl',
       $scope.presentation = PresentationService.get({presentationId: $routeParams.presentationId, eventId: $scope.defaultEvent.id}, (prez) ->
         $scope.avgRate = Presentation.averageRating(prez))
 
+      $scope.rate = 3
+
       addShortcutToRateFor = (rate) ->
         MousetrapService.bind(rate.toString(), ->
           $scope.$apply(->
@@ -18,17 +20,15 @@ angular.module('cfpReviewApp').controller 'PresentationCtrl',
         removeShortcutToRateFor rate for rate in [0..5]
       )
 
-      $scope.thumbnailUrl = (speaker) ->
-          return UserService.thumbnailUrl(speaker)
-
       addShortcutToRateFor rate for rate in [0..5]
-
-      $scope.rate = 3
 
       $scope.rateIt = (rate) ->
         $log.debug('change presentation rate to ' + rate)
         $scope.rate = rate
         RatingService.save({presentationId: $routeParams.presentationId, eventId: $scope.defaultEvent.id},
           {percentage: rate})
+
+      $scope.thumbnailUrl = (user) ->
+          return UserService.thumbnailUrl(user)
 
   ]

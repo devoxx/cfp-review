@@ -60,8 +60,8 @@
             <label class="control-label">About</label>
 
             <div class="controls">
-                <img ng-src="{{presentation.author.imageFile}}" alt="author image"> {{presentation.author.firstname}}
-                {{presentation.author.lastname}} ({{presentation.author.company}})
+                <div class="speakerIcon" style="background: url({{thumbnailUrl(presentation.author)}});" ></div>
+                {{presentation.author.firstname}} {{presentation.author.lastname}} ({{presentation.author.company}})
             </div>
         </div>
         <div class="control-group">

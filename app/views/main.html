@@ -1,7 +1,7 @@
 <div class="span9">
     <h3>Devoxx Call For Papers - Review</h3>
-    <h4 ng-hide="{{model.presentations.length == 0}}">Nothing to display</h4>
-    <table class="table table-striped" infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1'>
+    <h4 ng-show="model.presentations.length === 0">Nothing to display</h4>
+    <table ng-hide="model.presentations.length === 0" class="table table-striped" infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='2'>
         <caption>Presentation Search Results (1-{{model.presentations.length}}/{{model.count}})</caption>
         <thead>
         <tr>
@@ -30,61 +30,39 @@
         </tr>
         </tbody>
     </table>
-    <caption>Presentation Search Results (1-{{model.presentations.length}}/{{model.count}})</caption>
+    <caption ng-hide="model.presentations.length === 0">Presentation Search Results (1-{{model.presentations.length}}/{{model.count}})</caption>
     <div ng-show='busy'>Loading data...</div>
 </div>
 <div class="span2">
     <form>
         <fieldset>
             <legend>Search & Filter</legend>
-            <label>{{ query | json }}</label>
             <label>Event</label>
-            <select ng-model="query.eventId" ng-options="e.id as e.name for e in events"></select>
+            <select ng-model="event" ng-options="e as e.name for e in events"></select>
             <label>Type</label>
-            <select ng-model="query.type"  ng-options="t.id as t.name for t in types"></select>
+            <select ng-model="query.type" ng-options="t as t.name for t in event.types"></select>
             <label>Track</label>
-            <select ng-model="query.track"  ng-options="t.id as t.name for t in tracks"></select>
+            <select ng-model="query.track" ng-options="t as t.name for t in event.tracks"></select>
             <label>State</label>
-            <label class="checkbox">
-                <input type="checkbox"> DELETED
+            <label class="checkbox" ng-repeat="s in states track by $index">
+                <input type="checkbox" ng-model="s.value"> {{ s.id }}
             </label>
             <label class="checkbox">
-                <input type="checkbox" checked> REJECTED
+                <input type="checkbox" ng-model="query.alreadyRated"> Already rated (by me)
             </label>
             <label class="checkbox">
-                <input type="checkbox" checked> SUBMITTED
+                <input type="checkbox" ng-model="query.favouritesOnly"> Only Favorites
             </label>
             <label class="checkbox">
-                <input type="checkbox" checked> ONHOLD
+                <input type="checkbox" ng-model="query.invitesOnly"> Only Invites
             </label>
             <label class="checkbox">
-                <input type="checkbox" checked> BACKUP
-            </label>
-            <label class="checkbox">
-                <input type="checkbox" checked> APPROVED
-            </label>
-            <label class="checkbox">
-                <input type="checkbox" checked> ACCEPTED
-            </label>
-            <label class="checkbox">
-                <input type="checkbox" checked> DECLINED
-            </label>
-            <label class="checkbox">
-                <input type="checkbox"> Already rated (by me)
-            </label>
-            <label class="checkbox">
-                <input type="checkbox"> Only Favorites
-            </label>
-            <label class="checkbox">
-                <input type="checkbox"> Only Invites
-            </label>
-            <label class="checkbox">
-                <input type="checkbox"> With new comments
+                <input type="checkbox" ng-model="query.myCommentWasLast"> Only if my comment last
             </label>
             <input type="text" ng-model="tags" placeholder="Tags (space separated)">
             <label>Search keywords</label>
             <input type="text" ng-model="query.query">
-            <button type="submit" class="btn btn-primary" ng-click="refresh">Search</button>
+            <button class="btn btn-primary" ng-click="resetResultAndRefresh()">Refresh</button>
         </fieldset>
     </form>
 </div>

@@ -1,79 +1,115 @@
 angular.module('cfpReviewApp').controller 'MainCtrl',
-  ['$scope', 'PresentationQueryService', 'Presentation', '$rootScope', 'UserService', '$routeParams', '$log', '$http', ($scope, PresentationQueryService, Presentation, $rootScope, UserService, $routeParams, $log, $http) ->
+  ['$scope', 'PresentationQueryService', 'Presentation', '$timeout', ($scope, PresentationQueryService, Presentation, $timeout) ->
+# sample payload to search prezos
+#    {
+#      "eventId": 9,
+#      "type": {"id": 1}, //nullable
+#      "track": {"id": 1}, //nullable
+#      "states": ["DELETED"], //nullable, A set consisting of following elements: DELETED, REJECTED, SUBMITTED, ONHOLD, BACKUP, APPROVED, ACCEPTED, DECLINED
+#      "alreadyRated": true, //nullable, aplies to the logged in user (return all if null, return only rated by him/her, return only non-rated by him/her)
+#      "favouritesOnly": true, //nullable, return all, favourites, non-favourites
+#      "invitesOnly": true, //nullable, same logic as above
+#      "alreadyScheduled": true, //nullable, same logic as above
+#      "myCommentWasLast": true, //nullable, aplies to the logged in user (return all  if null, only those on which the last comment is his/hers, only those on which the last comment is not his/hers and he/she commented on it anyway)
+#      "tags": ["tag1", "tag2"], //nullable, A set of strings, freeform
+#      "query": "searchstring" //nullable, freeform string, used to look if presentation title, description, author name, lastname or company contains the given string
+#    }
 
-    $scope.query =
-      eventId: $routeParams.eventId ? $scope.defaultEvent.id
-      type: null
-      track: null
-      states: null
-      alreadyRated: null
-      favouritesOnly: null
-      invitesOnly: null
-      alreadyScheduled: null
-      myCommentWasLast: null
-      tags: null
-      query: null
-
-    $scope.model =
-      presentations: []
-    $scope.busy = false
-    $scope.index = 0
-
-    $scope.types = [
-      {id:null, name:'' },
-      {id:1, name:'Conference' },
-      {id:2, name:'University' },
-      {id:3, name:'Tools in Action' },
-      {id:4, name:'Hands-on Labs' },
-      {id:5, name:'BOF' },
-      {id:6, name:'Quickie' }
+    $scope.states = [
+      {id: 'DELETED', value: false},
+      {id: 'REJECTED', value: true},
+      {id: 'SUBMITTED', value: true},
+      {id: 'ONHOLD', value: true},
+      {id: 'BACKUP', value: true},
+      {id: 'APPROVED', value: true},
+      {id: 'ACCEPTED', value: true},
+      {id: 'DECLINED', value: true}
     ]
 
-    $scope.tracks = [
-      {id:null, name:'' },
-      {id:1, name:'Web' },
-      {id:2, name:'NoSQL' }
-    ]
+    ctrl = {}
 
-    $scope.addPresentations = (prezos) ->
+    ctrl.addStateIfSelected = (memo, s)->
+      memo.push(s.id) if s.value
+      memo
+
+    ctrl.refreshStates = ->
+     $scope.query.states = $scope.states.reduce(ctrl.addStateIfSelected, [])
+
+    $scope.$watch('states', ctrl.refreshStates, true)
+
+    ctrl.initQuery = ->
+      $scope.query =
+        eventId: $scope.event.id
+        type: null
+        track: null
+        states: $scope.states.reduce(ctrl.addStateIfSelected, [])
+        alreadyRated: null
+        favouritesOnly: null
+        invitesOnly: null
+        alreadyScheduled: null
+        myCommentWasLast: null
+        tags: null
+        query: null
+      $scope.index = 0
+      $scope.model =
+        presentations: []
+      $scope.busy = false
+
+    $scope.event = $scope.defaultEvent
+    ctrl.initQuery()
+
+    ctrl.refreshEvent = ->
+      return if !$scope.event
+      ctrl.initQuery()
+
+    $scope.$watch('event', ctrl.refreshEvent)
+
+    ctrl.addPresentations = (prezos) ->
       $scope.model.count = prezos.count
-      $scope.enrichPresentations(prezos)
-      for i in [0..prezos.results.length-1]
-        $scope.model.presentations.push(prezos.results[i])
-        $scope.busy = false
+      ctrl.enrichPresentations(prezos)
+      $scope.model.presentations.push p for p in prezos.results
+      $scope.busy = false
+      $scope.resetResultAndRefresh() if $scope.retry
+      $scope.retry = false
 
     $scope.refresh = ->
-      return if $scope.busy
       $scope.busy = true
-      PresentationQueryService.query({index: $scope.index}, $scope.query, $scope.addPresentations)
+      PresentationQueryService.query({index: $scope.index}, $scope.query, ctrl.addPresentations)
 
-    $scope.nextPage = ->
-      $scope.index++
+    $scope.resetResultAndRefresh = ->
+      if $scope.busy
+        $scope.retry = true
+        return
+      $scope.index = 0
+      $scope.model =
+        presentations: []
       $scope.refresh()
 
-    $scope.nextPage()
+    $scope.$watch('query', $scope.resetResultAndRefresh, true)
 
-    $scope.$watch('query', $scope.refresh, true)
+    ctrl.nextPage = ->
+      $scope.index++
+      $scope.refresh() if not $scope.busy
 
-    $scope.trim = (e)->
+    ctrl.trim = (e)->
       e.trim()
 
-    $scope.refreshTags = ->
+    ctrl.refreshTags = ->
       return if !$scope.tags
-      $scope.query.tags = $scope.tags.split(',').map($scope.trim)
+      $scope.query.tags = $scope.tags.split(',').map(ctrl.trim)
 
-    $scope.$watch('tags', $scope.refreshTags)
+    $scope.$watch('tags', ctrl.refreshTags)
 
     # set presentation.rating property with calculated average rating
-    $scope.updateRating = (prez) ->
+    ctrl.updateRating = (prez) ->
       prez.rating = Presentation.averageRating(prez)
 
-    # for each presensation in list calculate average rating
-    $scope.enrichPresentations = (presentations) ->
-      $scope.updateRating prez for prez in presentations.results
+    # for each presentation in list calculate average rating
+    ctrl.enrichPresentations = (presentations) ->
+      ctrl.updateRating prez for prez in presentations.results
 
     $scope.stateClass = (state) ->
-      switch state.toUpperCase()
+      switch state?.toUpperCase()
         when 'DELETED' then 'label-inverse'
         when 'REJECTED' then 'label-important'
         when 'SUBMITTED' then 'label-info'
@@ -95,6 +131,7 @@ angular.module('cfpReviewApp').controller 'MainCtrl',
 
     $scope.stateDisplay = (state) -> state?.toUpperCase().substr(0, 3)
 
-    $scope.typeDisplay = (type) -> type.name?.toUpperCase().substr(0, 1)
+    $scope.typeDisplay = (type) -> type?.name?.toUpperCase().substr(0, 1)
 
+    ctrl
   ]

@@ -47,21 +47,17 @@ describe 'Controller: MainCtrl', ->
     expect(actual).toEqual '?'
 
   it 'should update rating', ->
-    scope.updateRating presentation
+    MainCtrl.updateRating presentation
     expect(presentation.rating).toEqual 3
 
   it 'should not update rating if presentation ratings are undefined', ->
     prez = {}
-    scope.updateRating prez
+    MainCtrl.updateRating prez
     expect(prez.rating).toEqual '?'
 
   it 'should enrich presentation', ->
-    scope.enrichPresentations presentations
+    MainCtrl.enrichPresentations presentations
     expect(presentation.rating).toEqual 3
-
-  it 'should attach a list of talks to the scope', ->
-    rootScope.$broadcast('APP_LOADED')
-    expect(PresentationQueryService.query).toHaveBeenCalledWith({index: 1}, jasmine.any(Object), scope.addPresentations)
 
   it 'should return state class to use depending of state value', ->
     expect(scope.stateClass('Deleted')).toEqual('label-inverse')
