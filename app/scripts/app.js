@@ -10,7 +10,8 @@ angular.module('cfpReviewApp', ['GenericServices', 'Services', 'ui.bootstrap', '
         $routeProvider.when('/', {
             templateUrl: 'views/main.html',
             controller: 'MainCtrl',
-            resolve: resolver
+            resolve: resolver,
+            reloadOnSearch: false
         }).when('/presentation/:presentationId', {
             templateUrl: 'views/presentation.html',
             controller: 'PresentationCtrl',

@@ -38,11 +38,15 @@
         <fieldset>
             <legend>Search & Filter</legend>
             <label>Event</label>
-            <select ng-model="event" ng-options="e as e.name for e in events"></select>
+            <select ng-model="model.event" ng-options="e as e.name for e in events"></select>
             <label>Type</label>
-            <select ng-model="query.type" ng-options="t as t.name for t in event.types"></select>
+            <select ng-model="query.type" ng-options="t as t.name for t in model.event.types track by idToString(t.id)">
+                <option></option>
+            </select>
             <label>Track</label>
-            <select ng-model="query.track" ng-options="t as t.name for t in event.tracks"></select>
+            <select ng-model="query.track" ng-options="t as t.name for t in model.event.tracks track by idToString(t.id)">
+                <option></option>
+            </select>
             <label>State</label>
             <label class="checkbox" ng-repeat="s in states track by $index">
                 <input type="checkbox" ng-model="s.value"> {{ s.id }}

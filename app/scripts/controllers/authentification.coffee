@@ -1,6 +1,6 @@
 angular.module('cfpReviewApp').controller 'AuthenticationCtrl',
-  ['$scope', 'UserService', 'EventBus', '$rootScope', '$cookies', '$location',
-    ($scope, UserService, EventBus, $rootScope, $cookies, $location) ->
+  ['$scope', 'UserService', 'EventBus', '$cookies', '$location',
+    ($scope, UserService, EventBus, $cookies, $location) ->
       $scope.login = ->
         UserService.login $scope.emailOrUsername, $scope.password
 
@@ -11,18 +11,18 @@ angular.module('cfpReviewApp').controller 'AuthenticationCtrl',
         UserService.logout
         $scope.user = null
 
-      EventBus.onLoginSuccess($scope, (user, userToken, event) ->
+      EventBus.onLoginSuccess($scope, (user, userToken) ->
         $scope.user = user
         $cookies.userToken = userToken
         $scope.loginError = null
       )
 
-      EventBus.onLoginFailed($scope, (reason, event) ->
+      EventBus.onLoginFailed($scope, (reason) ->
         $scope.loginDisabled = false
         $scope.loginError = reason
       )
 
-      EventBus.onLoggedOut($scope, (oldUser, oldUserToken, event) ->
+      EventBus.onLoggedOut($scope, ->
         $cookies.userToken = ''
         $scope.user = null
         $scope.loginDisabled = false

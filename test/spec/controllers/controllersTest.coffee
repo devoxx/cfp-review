@@ -1,4 +1,4 @@
-describe 'Controller: MainCtrl', ->
+xdescribe 'Controller: MainCtrl', ->
   beforeEach module 'cfpReviewApp'
   beforeEach ->
     this.addMatchers {
