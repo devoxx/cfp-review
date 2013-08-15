@@ -1,7 +1,7 @@
 <div class="span9">
     <h3>Devoxx Call For Papers - Review</h3>
     <h4 ng-show="model.presentations.length === 0">Nothing to display</h4>
-    <table ng-hide="model.presentations.length === 0" class="table table-striped" infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='2'>
+    <table ng-hide="model.presentations.length === 0" class="table table-striped" infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1'>
         <caption>Presentation Search Results (1-{{model.presentations.length}}/{{model.count}})</caption>
         <thead>
         <tr>
