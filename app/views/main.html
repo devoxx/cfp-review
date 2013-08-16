@@ -1,7 +1,7 @@
 <div class="span9">
     <h3>Devoxx Call For Papers - Review</h3>
     <h4 ng-show="model.presentations.length === 0">Nothing to display</h4>
-    <table ng-hide="model.presentations.length === 0" class="table table-striped" infinite-scroll='nextPage()' infinite-scroll-disabled='busy' infinite-scroll-distance='1'>
+    <table ng-hide="model.presentations.length === 0" class="table table-striped" infinite-scroll='nextPage()' infinite-scroll-disabled='model.busy' infinite-scroll-distance='1'>
         <caption>Presentation Search Results (1-{{model.presentations.length}}/{{model.count}})</caption>
         <thead>
         <tr>
@@ -31,41 +31,41 @@
         </tbody>
     </table>
     <caption ng-hide="model.presentations.length === 0">Presentation Search Results (1-{{model.presentations.length}}/{{model.count}})</caption>
-    <div ng-show='busy'>Loading data...</div>
+    <div ng-show='model.busy'>Loading data...</div>
 </div>
 <div class="span2">
     <form>
         <fieldset>
             <legend>Search & Filter</legend>
             <label>Event</label>
-            <select ng-model="model.event" ng-options="e as e.name for e in events"></select>
+            <select ng-model="model.event" ng-options="e as e.name for e in model.events"></select>
             <label>Type</label>
-            <select ng-model="query.type" ng-options="t as t.name for t in model.event.types track by idToString(t.id)">
+            <select ng-model="model.query.type" ng-options="t as t.name for t in model.event.types track by idToString(t.id)">
                 <option></option>
             </select>
             <label>Track</label>
-            <select ng-model="query.track" ng-options="t as t.name for t in model.event.tracks track by idToString(t.id)">
+            <select ng-model="model.query.track" ng-options="t as t.name for t in model.event.tracks track by idToString(t.id)">
                 <option></option>
             </select>
             <label>State</label>
-            <label class="checkbox" ng-repeat="s in states track by $index">
+            <label class="checkbox" ng-repeat="s in model.states track by $index">
                 <input type="checkbox" ng-model="s.value"> {{ s.id }}
             </label>
             <label class="checkbox">
-                <input type="checkbox" ng-model="query.alreadyRated"> Already rated (by me)
+                <input type="checkbox" ng-model="model.query.alreadyRated"> Already rated (by me)
             </label>
             <label class="checkbox">
-                <input type="checkbox" ng-model="query.favouritesOnly"> Only Favorites
+                <input type="checkbox" ng-model="model.query.favouritesOnly"> Only Favorites
             </label>
             <label class="checkbox">
-                <input type="checkbox" ng-model="query.invitesOnly"> Only Invites
+                <input type="checkbox" ng-model="model.query.invitesOnly"> Only Invites
             </label>
             <label class="checkbox">
-                <input type="checkbox" ng-model="query.myCommentWasLast"> Only if my comment last
+                <input type="checkbox" ng-model="model.query.myCommentWasLast"> Only if my comment last
             </label>
-            <input type="text" ng-model="tags" placeholder="Tags (space separated)">
+            <input type="text" ng-model="model.tags" placeholder="Tags (space separated)">
             <label>Search keywords</label>
-            <input type="text" ng-model="query.query">
+            <input type="text" ng-model="model.query.query">
             <button class="btn btn-primary" ng-click="resetResultAndRefresh()">Refresh</button>
         </fieldset>
     </form>

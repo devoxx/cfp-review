@@ -10,9 +10,6 @@ angular
             'query': {method: 'POST'}
         });
     }])
-    .factory('EventsService', ['$resource', 'ConfigAPI', function ($resource, ConfigAPI) {
-        return $resource(ConfigAPI.endPoint + 'proposal/event/:eventId');
-    }])
     .factory('RatingService', ['$resource', 'ConfigAPI', 'UserService', function ($resource, ConfigAPI, UserService) {
         return $resource(ConfigAPI.endPoint + 'review/event/:eventId/presentation/:presentationId/rating', {userToken: UserService.getToken()});
     }])
@@ -20,12 +17,11 @@ angular
         /* jshint -W117 */
         return Mousetrap;
     })
-    .factory('ResolverService', ['EventService', 'UserService', '$q', '$rootScope', function (EventService, UserService, $q, $rootScope) {
+    .factory('ResolverService', ['EventService', 'UserService', 'Presentation', '$q', '$rootScope', function (EventService, UserService, Presentation, $q, $rootScope) {
         var defer = $q.defer();
         UserService.waitForCurrentUser().then(function () {
             EventService.getEvents().then(function (events) {
-                $rootScope.events = events;
-                $rootScope.defaultEvent = events[0];
+                Presentation.keepEvents(events);
                 defer.resolve();
             });
         });
