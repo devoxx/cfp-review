@@ -2,7 +2,7 @@
 <article>
 
 <div class="page-header">
-    <h3>{{presentation.title}}
+    <h3>{{presentation.title}} <span ng-show="comingFromSearch()">({{ model.presentationIndex + 1 }} / {{ model.count }})</span>
         <span class="badge badge-success pull-right">{{presentation.state}}</span>
     </h3>
 </div>
@@ -19,7 +19,7 @@
                 <select>
                     <option>{{presentation.track.name}}</option>
                 </select>
-                ({{presentation.language.language}})
+                <span class="pull-right">lang: {{presentation.language.language || 'unknown'}}</span>
             </div>
         </div>
     </form>
@@ -345,7 +345,7 @@
 
         <h3> Rating: <label class="badge badge-success"><h1>{{avgRate && avgRate | number:1 || '?'}}</h1></label></h3>
 
-        <h3>Rate it !</h3>
+        <h4>Rate it !</h4>
 
         <div class="btn-group btn-group-vertical">
             <button type="button" class="btn btn-success" ng-model="rate" btn-radio="'5'" ng-click="rateIt(5)"><h2 ng-class="{'rated': rate == '5'}">5</h2></button>
@@ -356,9 +356,10 @@
             <button type="button" class="btn btn-danger" ng-model="rate" btn-radio="'0'" ng-click="rateIt(0)"><h2 ng-class="{'rated': rate == '0'}">0</h2></button>
         </div>
 
-        <h3>Shortcuts Keys</h3>
+        <h4>Shortcuts Keys</h4>
         <label>0..5 = rate 0 to 5</label>
-        <!--<label>p = previous / n = next</label>-->
+        <label ng-show="comingFromSearch()">p, left, up = previous</label>
+        <label ng-show="comingFromSearch()">n, right, down = next</label>
 
     </div>
 

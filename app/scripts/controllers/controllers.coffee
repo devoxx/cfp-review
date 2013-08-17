@@ -1,5 +1,5 @@
 angular.module('cfpReviewApp').controller 'MainCtrl',
-  ['$scope', 'PresentationQueryService', 'Presentation', '$location', '$routeParams', ($scope, PresentationQueryService, Presentation, $location, $routeParams) ->
+  ['$scope', 'PresentationQueryService', 'PresentationQuery', ($scope, PresentationQueryService, PresentationQuery) ->
 # sample payload to search prezos
 #    {
 #      "eventId": 9,
@@ -16,16 +16,15 @@ angular.module('cfpReviewApp').controller 'MainCtrl',
 #    }
 
     ctrl = {}
-    $scope.model = Presentation.init()
+    $scope.model = PresentationQuery.init()
 
-    $scope.$watch('model.states', Presentation.refreshStates, true)
-    $scope.$watch('model.event', Presentation.refreshEvent)
-    $scope.$watch('model.query', Presentation.resetResultAndRefresh, true)
-    $scope.$watch('model.tags', Presentation.refreshTags)
+    $scope.$watch('model.states', PresentationQuery.refreshStates, true)
+    $scope.$watch('model.event', PresentationQuery.refreshEvent)
+    $scope.$watch('model.query', PresentationQuery.resetResultAndRefresh, true)
+    $scope.$watch('model.tags', PresentationQuery.refreshTags)
 
     $scope.nextPage = ->
-      $scope.model.index++
-      Presentation.refresh() if not $scope.model.busy
+      PresentationQuery.refresh(true) if not $scope.model.busy
 
     $scope.stateClass = (state) ->
       switch state?.toUpperCase()

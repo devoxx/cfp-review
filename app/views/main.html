@@ -22,7 +22,7 @@
             <td><input value=" " type="submit" ng-class="{'invited': p.invited, 'uninvited': !p.invited}"></td>
             <td><input value=" " type="submit" ng-class="{'scheduled': p.scheduled, 'unscheduled': !p.scheduled}"></td>
             <td><a href="#">{{p.author.firstname}} {{p.author.lastname}}</a></td>
-            <td><a href="#/presentation/{{p.id}}">{{p.title}}</a></td>
+            <td><a href="#/event/{{ model.event.id }}/presentation/{{p.id}}">{{p.title}}</a></td>
             <td>{{typeDisplay(p.type)}}</td>
             <td><span class="label" ng-class="stateClass(p.state)">{{stateDisplay(p.state)}}</span></td>
             <td><span class="label" ng-class="ratingClass(p.rating)">{{p.rating | number:1}}</span></td>

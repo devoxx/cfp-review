@@ -12,7 +12,7 @@ angular.module('cfpReviewApp', ['GenericServices', 'Services', 'ui.bootstrap', '
             controller: 'MainCtrl',
             resolve: resolver,
             reloadOnSearch: false
-        }).when('/presentation/:presentationId', {
+        }).when('/event/:eventId/presentation/:presentationId', {
             templateUrl: 'views/presentation.html',
             controller: 'PresentationCtrl',
             resolve: resolver

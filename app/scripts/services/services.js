@@ -17,11 +17,11 @@ angular
         /* jshint -W117 */
         return Mousetrap;
     })
-    .factory('ResolverService', ['EventService', 'UserService', 'Presentation', '$q', '$rootScope', function (EventService, UserService, Presentation, $q, $rootScope) {
+    .factory('ResolverService', ['EventService', 'UserService', 'PresentationQuery', '$q', '$rootScope', function (EventService, UserService, PresentationQuery, $q) {
         var defer = $q.defer();
         UserService.waitForCurrentUser().then(function () {
             EventService.getEvents().then(function (events) {
-                Presentation.keepEvents(events);
+                PresentationQuery.keepEvents(events);
                 defer.resolve();
             });
         });
