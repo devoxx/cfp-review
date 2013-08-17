@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Service: Services', function () {
+xdescribe('Service: Services', function () {
 
     beforeEach(module('cfpReviewApp'));
 
