@@ -17,7 +17,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="p in model.presentations track by $index" ng-class="{'success': stateDisplay(p.state)=='ACC'}" id="presentation-{{p.id}}">
+        <tr ng-repeat="p in model.presentations track by $index" ng-class="{'success': stateDisplay(p.state)=='ACC'}" id="presentation-{{p.id}}"
+            popover="{{p.summary}}"
+            popover-trigger="mouseenter"
+            popover-placement="bottom"
+            popover-title="Summary"
+            popover-popup-delay="300">
             <td><input value=" " type="submit" ng-class="{'favorite': p.favorite, 'unfavorite': !p.favorite}"></td>
             <td><input value=" " type="submit" ng-class="{'invited': p.invited, 'uninvited': !p.invited}"></td>
             <td><input value=" " type="submit" ng-class="{'scheduled': p.scheduled, 'unscheduled': !p.scheduled}"></td>

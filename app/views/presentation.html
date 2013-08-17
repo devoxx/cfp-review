@@ -2,8 +2,9 @@
 <article>
 
 <div class="page-header">
-    <h3>{{presentation.title}} <span ng-show="comingFromSearch()">({{ model.presentationIndex + 1 }} / {{ model.count }})</span>
-        <span class="badge badge-success pull-right">{{presentation.state}}</span>
+    <h3>{{presentation.title}}
+        <span class="pull-right" ng-show="comingFromSearch()">({{ model.presentationIndex + 1 }} / {{ model.count }})</span>
+        <span class="badge badge-success pull-left">{{presentation.state}}</span>
     </h3>
 </div>
 
@@ -13,10 +14,10 @@
             <label class="control-label">{{presentation.event.name}}</label>
 
             <div class="controls">
-                <select>
+                <select disabled>
                     <option>{{presentation.type.name}}</option>
                 </select>
-                <select>
+                <select disabled>
                     <option>{{presentation.track.name}}</option>
                 </select>
                 <span class="pull-right">lang: {{presentation.language.language || 'unknown'}}</span>
@@ -271,7 +272,30 @@
     <table class="table table-striped" ng-show="presentation.feedbacks">
         <tbody>
         <tr ng-repeat="f in presentation.feedbacks">
-            <td>{{f | json}}</a></td>
+            <td>
+                <div class="row-fluid">
+                    <div class="row-fluid">
+                        <div class="span2">
+                            <div class="speakerIcon" style="background: url({{thumbnailUrl(f.user)}});"></div>
+                        </div>
+                        <div class="span10">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <span>{{f.user.firstname}} {{f.user.lastname}}</span><br>
+                                    <span>{{f.createdOn|date:'medium'}}</span>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <br>
+                                    <span>{{f.text}}<span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -281,8 +305,8 @@
             <label class="control-label"></label>
 
             <div class="controls">
-                <textarea rows=3></textarea>
-                <button type="button" class="btn">Add feedback</button>
+                <textarea rows=3 ng-model="newFeedback"></textarea>
+                <button type="button" class="btn" ng-click="addFeedback">Add feedback</button>
             </div>
         </div>
     </form>
@@ -294,13 +318,13 @@
     <h4>Comments</h4>
 
     <table class="table table-striped" ng-show="presentation.comments">
-            <tbody>
+        <tbody>
         <tr ng-repeat="comment in presentation.comments">
             <td>
                 <div class="row-fluid">
                     <div class="row-fluid">
                         <div class="span2">
-                            <div class="speakerIcon" style="background: url({{thumbnailUrl(comment.user)}});" ></div>
+                            <div class="speakerIcon" style="background: url({{thumbnailUrl(comment.user)}});"></div>
                         </div>
                         <div class="span10">
                             <div class="row-fluid">
@@ -329,8 +353,8 @@
             <label class="control-label">What do you think ?</label>
 
             <div class="controls">
-                <textarea rows=3></textarea>
-                <button type="button" class="btn">Add your comment</button>
+                <textarea rows=3 ng-model="newComment"></textarea>
+                <button type="button" class="btn" ng-click="addComment">Add your comment</button>
             </div>
         </div>
     </form>

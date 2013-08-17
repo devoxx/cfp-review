@@ -1,6 +1,6 @@
 angular.module('cfpReviewApp').controller 'PresentationCtrl',
-  ['$scope', 'PresentationService', 'PresentationQuery', 'RatingService', '$routeParams', '$log', 'MousetrapService','UserService'
-    ($scope, PresentationService, PresentationQuery, RatingService, $routeParams, $log, MousetrapService, UserService) ->
+  ['$scope', 'PresentationService', 'PresentationQuery', 'RatingService', '$routeParams', '$log', 'MousetrapService','UserService', 'CommentService', 'FeedbackService'
+    ($scope, PresentationService, PresentationQuery, RatingService, $routeParams, $log, MousetrapService, UserService, CommentService, FeedbackService) ->
 
       calculateAvgRate = (prez) ->
         $scope.avgRate = PresentationQuery.averageRating(prez)
@@ -62,5 +62,15 @@ angular.module('cfpReviewApp').controller 'PresentationCtrl',
 
       $scope.model = PresentationQuery.getModel()
       $scope.model.presentationIndex = PresentationQuery.findPresentationIndex($routeParams.presentationId)
+
+      $scope.addComment = ->
+        return if !$scope.newComment
+        CommentService.save({presentationId: $routeParams.presentationId, eventId: $routeParams.eventId},
+        {text: $scope.newComment, user: UserService.getCurrentUser(), createdOn: Date.now()})
+
+      $scope.addFeedback = ->
+        return if !$scope.newFeedback
+        FeedbackService.save({presentationId: $routeParams.presentationId, eventId: $routeParams.eventId},
+        {text: $scope.newFeedback, user: UserService.getCurrentUser(), createdOn: Date.now()})
 
   ]

@@ -4,7 +4,7 @@ angular.module('cfpReviewApp', ['GenericServices', 'Services', 'ui.bootstrap', '
     .config(function ($routeProvider) {
 
         var resolver = {
-            userAndEvents: 'ResolverService'
+            userAndEvents: 'UserAndEventsResolverService'
         };
 
         $routeProvider.when('/', {
@@ -19,7 +19,7 @@ angular.module('cfpReviewApp', ['GenericServices', 'Services', 'ui.bootstrap', '
         }).otherwise({
             redirectTo: '/'
         });
-    }).run([ 'UserService', '$cookies', function (UserService, $cookies) {
+    }).run(['UserService', '$cookies', function (UserService, $cookies) {
         var userToken = $cookies.userToken;
         if (userToken && userToken.length > 0) {
             UserService.loginByToken(userToken);

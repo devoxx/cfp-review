@@ -1,19 +1,8 @@
 angular.module('cfpReviewApp').factory 'PresentationQuery',
-  ['PresentationService', 'PresentationQueryService', '$routeParams', '$location'
-    (PresentationService, PresentationQueryService, $routeParams, $location) ->
+  ['PresentationService', 'PresentationQueryService', 'KeepEventService', '$routeParams', '$location'
+    (PresentationService, PresentationQueryService, KeepEventService, $routeParams, $location) ->
 
       model = {}
-      events = {}
-
-      keepEvents = (evts) ->
-        events = evts
-
-      eventFromParams = (e)->
-        '' + e.id == '' + $routeParams.eventId
-
-      # search event from url param eventId, if not found use the first
-      initEvent = ->
-        events.filter(eventFromParams)[0] || events[0]
 
       # calculate average rating of a presentation
       averageRating = (prez) ->
@@ -87,8 +76,8 @@ angular.module('cfpReviewApp').factory 'PresentationQuery',
 
       init = ->
         model =
-          event: initEvent()
-          events: events
+          event: KeepEventService.initEvent()
+          events: KeepEventService.getEvents()
           states: initStates()
           tags: initTags()
           busy: false
@@ -216,8 +205,6 @@ angular.module('cfpReviewApp').factory 'PresentationQuery',
 
       service =
         averageRating: averageRating
-        keepEvents: keepEvents
-        initEvent: initEvent
         init: init
         refreshStates: refreshStates
         refreshEvent: refreshEvent
