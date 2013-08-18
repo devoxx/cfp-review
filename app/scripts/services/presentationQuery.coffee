@@ -1,6 +1,6 @@
-angular.module('cfpReviewApp').factory 'PresentationQuery',
-  ['PresentationService', 'PresentationQueryService', 'KeepEventService', '$routeParams', '$location'
-    (PresentationService, PresentationQueryService, KeepEventService, $routeParams, $location) ->
+angular.module('Services').factory 'PresentationQuery',
+  ['PresentationService', 'PresentationQueryService', 'KeepEventService', 'UserService', '$routeParams', '$location'
+    (PresentationService, PresentationQueryService, KeepEventService, UserService, $routeParams, $location) ->
 
       model = {}
 
@@ -203,6 +203,12 @@ angular.module('cfpReviewApp').factory 'PresentationQuery',
         newPresentationId = if presentationIndex < model.count then getNextPresentationId(presentationIndex) else null
         gotoPresentation(newPresentationId)
 
+      byUserId = (r) ->
+        r?.user?.id == this?.id
+
+      findCurrentUserRating = (p) ->
+        p.ratings?.filter(byUserId, UserService.getCurrentUser())[0]
+
       service =
         averageRating: averageRating
         init: init
@@ -216,6 +222,7 @@ angular.module('cfpReviewApp').factory 'PresentationQuery',
         next: next
         getModel: getModel
         findPresentationIndex: findPresentationIndex
+        findCurrentUserRating: findCurrentUserRating
 
       return service
   ]

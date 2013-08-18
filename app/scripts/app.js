@@ -1,6 +1,8 @@
 'use strict';
 
-angular.module('cfpReviewApp', ['GenericServices', 'Services', 'ui.bootstrap', 'ngCookies', 'infinite-scroll'])
+angular.module('cfpSpeakerApp', []);
+
+angular.module('cfpReviewApp', ['GenericServices', 'Services', 'ui.bootstrap', 'ngCookies', 'infinite-scroll', 'cfpSpeakerApp'])
     .config(function ($routeProvider) {
 
         var resolver = {

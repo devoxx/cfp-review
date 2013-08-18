@@ -2,25 +2,25 @@
 <article>
 
 <div class="page-header">
-    <h3>{{presentation.title}}
+    <h3>{{model.presentation.title}}
         <span class="pull-right" ng-show="comingFromSearch()">({{ model.presentationIndex + 1 }} / {{ model.count }})</span>
-        <span class="badge badge-success pull-left">{{presentation.state}}</span>
+        <span class="badge badge-success pull-left">{{model.presentation.state}}</span>
     </h3>
 </div>
 
 <header>
     <form class="form-horizontal">
         <div class="control-group">
-            <label class="control-label">{{presentation.event.name}}</label>
+            <label class="control-label">{{model.presentation.event.name}}</label>
 
             <div class="controls">
                 <select disabled>
-                    <option>{{presentation.type.name}}</option>
+                    <option>{{model.presentation.type.name}}</option>
                 </select>
                 <select disabled>
-                    <option>{{presentation.track.name}}</option>
+                    <option>{{model.presentation.track.name}}</option>
                 </select>
-                <span class="pull-right">lang: {{presentation.language.language || 'unknown'}}</span>
+                <span class="pull-right">lang: {{model.presentation.language.language || 'unknown'}}</span>
             </div>
         </div>
     </form>
@@ -37,14 +37,14 @@
             <label class="control-label">Summary</label>
 
             <div class="controls">
-                <pre>{{presentation.summary}}</pre>
+                <pre>{{model.presentation.summary}}</pre>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">Audience</label>
 
             <div class="controls">
-                <span class="label">{{presentation.audienceExperience}}</span>
+                <span class="label">{{model.presentation.audienceExperience}}</span>
             </div>
         </div>
     </form>
@@ -61,22 +61,22 @@
             <label class="control-label">About</label>
 
             <div class="controls">
-                <div class="speakerIcon" style="background: url({{thumbnailUrl(presentation.author)}});" ></div>
-                {{presentation.author.firstname}} {{presentation.author.lastname}} ({{presentation.author.company}})
+                <div class="speakerIcon" style="background: url({{thumbnailUrl(model.presentation.author)}});" ></div>
+                {{model.presentation.author.firstname}} {{model.presentation.author.lastname}} ({{model.presentation.author.company}})
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">Bio</label>
 
             <div class="controls">
-                <pre>{{presentation.author.speakerBio}}</pre>
+                <pre>{{model.presentation.author.speakerBio}}</pre>
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">References</label>
 
             <div class="controls">
-                <pre>{{presentation.author.speakingReferences}}</pre>
+                <pre>{{model.presentation.author.speakingReferences}}</pre>
             </div>
         </div>
     </form>
@@ -88,7 +88,7 @@
 
     <h4>Other Speakers</h4>
 
-    <form class="form-horizontal" ng-repeat="other in presentation.speakers">
+    <form class="form-horizontal" ng-repeat="other in model.presentation.speakers">
         <div class="control-group">
             <label class="control-label">About</label>
 
@@ -119,7 +119,8 @@
             <label class="control-label">Add speaker</label>
 
             <div class="controls">
-                <input type="text" placeholder="add speaker username here">
+                <input type="text" placeholder="add speaker username here" ng-model="model.newSpeaker">
+                <button type="button" class="btn" ng-click="addSpeaker">Add speaker</button>
             </div>
         </div>
     </form>
@@ -132,7 +133,11 @@
 
     <h4>Tags</h4>
     <ul class="unstyled">
-        <li ng-repeat="tag in presentation.tags"><a href="#"><i class="icon-trash"></i></a> <span class="label">{{tag.name}}</span>
+        <li ng-repeat="tag in model.presentation.tags">
+            <a href="#">
+                <i class="icon-trash"></i>
+            </a>
+            <span class="label">{{tag.name}}</span>
         </li>
     </ul>
 
@@ -141,7 +146,13 @@
             <label class="control-label">Add tag</label>
 
             <div class="controls">
-                <input type="text" placeholder="add a new tag here">
+                <input
+                    type="text"
+                    placeholder="add a new tag here"
+                    ng-model="model.newTag"
+                    typeahead="t.name for t in getTags($viewValue)"
+                    devoxx-special-keys="9,32,188"
+                    devoxx-on-return-key="addTag()">
             </div>
         </div>
     </form>
@@ -155,21 +166,6 @@
     <h4>Status</h4>
 
     <form class="form-horizontal">
-        <!--<div class="control-group">-->
-            <!--<label class="control-label">Rating</label>-->
-
-            <!--<div class="controls">-->
-                <!--<span class="label label-success">4.2</span>-->
-                <!--Rate-->
-                <!--<span class="label label-important">0</span>-->
-                <!--<span class="label label-important">1</span>-->
-                <!--<span class="label label-warning">2</span>-->
-                <!--<span class="label label-warning">3</span>-->
-                <!--<span class="label label-success">4</span>-->
-                <!--<span class="label label-success">5</span>-->
-                <!--(1 is bad, 5 is excellent, 0 for no vote)-->
-            <!--</div>-->
-        <!--</div>-->
         <div class="control-group">
             <label class="control-label">Schedulable</label>
 
@@ -201,14 +197,14 @@
             <label class="control-label">ScheduleCode</label>
 
             <div class="controls">
-                {{presentation.schedule.itemCode}}
+                {{model.presentation.schedule.itemCode}}
             </div>
         </div>
         <div class="control-group">
             <label class="control-label">State</label>
 
             <div class="controls">
-                <span class="label">{{presentation.state}}</span>
+                <span class="label">{{model.presentation.state}}</span>
             </div>
         </div>
         <div class="control-group">
@@ -242,7 +238,7 @@
 
     <h4>Other submissions</h4>
 
-    <table class="table table-striped" ng-show="presentation.otherPresentations">
+    <table class="table table-striped" ng-show="model.presentation.otherPresentations">
         <thead>
         <tr>
             <th>title</th>
@@ -253,7 +249,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="p in presentation.otherPresentations">
+        <tr ng-repeat="p in model.presentation.otherPresentations">
             <td><a href="#/{{p.id}}">{{p.title}}</a></td>
             <td>{{typeDisplay(p.type)}}</td>
             <td><span class="label" ng-class="stateClass(p.state)">{{stateDisplay(p.state)}}</span></td>
@@ -269,9 +265,9 @@
 <section>
     <h4>Speaker Questions and Feedback</h4>
 
-    <table class="table table-striped" ng-show="presentation.feedbacks">
+    <table class="table table-striped" ng-show="model.presentation.feedbacks">
         <tbody>
-        <tr ng-repeat="f in presentation.feedbacks">
+        <tr ng-repeat="f in model.presentation.feedbacks">
             <td>
                 <div class="row-fluid">
                     <div class="row-fluid">
@@ -317,9 +313,9 @@
 <section>
     <h4>Comments</h4>
 
-    <table class="table table-striped" ng-show="presentation.comments">
+    <table class="table table-striped" ng-show="model.presentation.comments">
         <tbody>
-        <tr ng-repeat="comment in presentation.comments">
+        <tr ng-repeat="comment in model.presentation.comments">
             <td>
                 <div class="row-fluid">
                     <div class="row-fluid">
@@ -372,12 +368,12 @@
         <h4>Rate it !</h4>
 
         <div class="btn-group btn-group-vertical">
-            <button type="button" class="btn btn-success" ng-model="rate" btn-radio="'5'" ng-click="rateIt(5)"><h2 ng-class="{'rated': rate == '5'}">5</h2></button>
-            <button type="button" class="btn btn-success" ng-model="rate" btn-radio="'4'" ng-click="rateIt(4)"><h2 ng-class="{'rated': rate == '4'}">4</h2></button>
-            <button type="button" class="btn btn-warning" ng-model="rate" btn-radio="'3'" ng-click="rateIt(3)"><h2 ng-class="{'rated': rate == '3'}">3</h2></button>
-            <button type="button" class="btn btn-warning" ng-model="rate" btn-radio="'2'" ng-click="rateIt(2)"><h2 ng-class="{'rated': rate == '2'}">2</h2></button>
-            <button type="button" class="btn btn-danger" ng-model="rate" btn-radio="'1'" ng-click="rateIt(1)"><h2 ng-class="{'rated': rate == '1'}">1</h2></button>
-            <button type="button" class="btn btn-danger" ng-model="rate" btn-radio="'0'" ng-click="rateIt(0)"><h2 ng-class="{'rated': rate == '0'}">0</h2></button>
+            <button type="button" class="btn btn-success" ng-model="model.rate" btn-radio="'5'" ng-click="rateIt(5)"><h2 ng-class="{'rated': model.rate == '5'}">5</h2></button>
+            <button type="button" class="btn btn-success" ng-model="model.rate" btn-radio="'4'" ng-click="rateIt(4)"><h2 ng-class="{'rated': model.rate == '4'}">4</h2></button>
+            <button type="button" class="btn btn-warning" ng-model="model.rate" btn-radio="'3'" ng-click="rateIt(3)"><h2 ng-class="{'rated': model.rate == '3'}">3</h2></button>
+            <button type="button" class="btn btn-warning" ng-model="model.rate" btn-radio="'2'" ng-click="rateIt(2)"><h2 ng-class="{'rated': model.rate == '2'}">2</h2></button>
+            <button type="button" class="btn btn-danger" ng-model="model.rate" btn-radio="'1'" ng-click="rateIt(1)"><h2 ng-class="{'rated': model.rate == '1'}">1</h2></button>
+            <button type="button" class="btn btn-danger" ng-model="model.rate" btn-radio="'0'" ng-click="rateIt(0)"><h2 ng-class="{'rated': model.rate == '0'}">0</h2></button>
         </div>
 
         <h4>Shortcuts Keys</h4>
